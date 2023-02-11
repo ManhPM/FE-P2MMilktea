@@ -7,6 +7,7 @@ import HomePageFoods from "../components/HomePageFoods/HomePageFoods";
 import MenuList from "../components/Menu/MenuList";
 import HealthyAd from "../components/Healthy/HealthyAd";
 import SubSlider from "../components/SubSliderAndAdver/SubSlider";
+import Footer from "../components/UI/Footer";
 
 const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage = () => {
       <MenuList />
       <HealthyAd />
       <SubSlider />
+      <Footer/>
     </div>
   );
 };
