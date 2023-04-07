@@ -1,11 +1,10 @@
-import {React} from 'react';
+import {React, useState} from 'react';
 import { useFormik } from "formik";
-
-
-import CloseIcon from "@mui/icons-material/Close";
-import { NavLink } from "react-router-dom";
-import { Fragment } from "react";
-
+import axios from '../redux/axios';
+import { useNavigate } from 'react-router-dom';
+//import CloseIcon from "@mui/icons-material/Close";
+//import { NavLink } from "react-router-dom";
+//import { Fragment } from "react";
 import LabledInput from "../components/UI/Input/LabledInput"
 import Button from "../components/UI/Button/SmallButton"
 
@@ -43,9 +42,9 @@ const validateLogin = (values) => {
       } else if (!/[,#-\/\s\!\@\$.....]/.test(values.address)) {
         errors.address = "địa chỉ không hợp lệ !";
     }
-    if (values.checkpassword != values.password) {
-      errors.checkpassword = "Mật khẩu không trùng khớp !";
-    }
+    // if (values.checkpassword != values.password) {
+    //   errors.checkpassword = "Mật khẩu không trùng khớp !";
+    // }
   
     return errors;
 };
@@ -54,29 +53,44 @@ const validateLogin = (values) => {
 
 
 const Register = () => {
+    const navigate = useNavigate();
+
+    const handlesubmit = (values) => {
+      axios.post(`http://localhost:3005/account/create`,values)
+      .then(function (res) {
+        console.log(res)
+        alert('Đăng Ký Thành công'); 
+        navigate("/") 
+      })
+      .catch(function (res) {
+        console.log(res)
+      });
+    }
     const formikRegister = useFormik({
         initialValues: {
-          email: "",
+          username: "",
           password: "",
           name:"",
-          username: "",
+          email: "",
           phone:"",
           address:"",
-          checkpassword:"",
+      
         },
         validate: validateLogin,
-        onSubmit: (values, { resetForm }) => {
-          resetForm();
-        },
+        onSubmit: values => {
+            handlesubmit(values)
+            console.log(values);
+        }
       });
-    console.log("vao dk ")
+    //console.log(username);
     return (
+      
     <div>
       <div className="container " style={{marginTop:"100px"}}> 
       <div>
         <h1 className='display-6 mark text-center'>Đăng ký tài khoản</h1>
       </div>
-      <form onSubmit={formikRegister.onSubmit}> 
+      <form onSubmit={formikRegister.handleSubmit}> 
         <LabledInput
          name="username"
          label="username"
@@ -120,21 +134,21 @@ const Register = () => {
             : null
         }
       /> 
-      <LabledInput
+      {/* <LabledInput
         name="checkpassword"
         label="Nhập lại Mật khẩu"
         placeholder="Nhập 8 kí tự có ít nhất 1 chữ cái viết hoa và 1 số"
         required={true}
         type="password"
-        value={formikRegister.values.checkpassword}
-        onChange={formikRegister.handleChange}
+        //value={formikRegister.values.checkpassword}
+        //onChange={formikRegister.handleChange}
         onBlur={formikRegister.handleBlur}
         error={
             formikRegister.touched.checkpassword && formikRegister.errors.checkpassword
             ? formikRegister.errors.checkpassword
             : null
         }
-      /> 
+      />  */}
       <LabledInput
         name="name"
         label="Họ tên của bạn"
@@ -181,6 +195,7 @@ const Register = () => {
      </form> 
      </div>        
     </div>
+    
     )
 };
 

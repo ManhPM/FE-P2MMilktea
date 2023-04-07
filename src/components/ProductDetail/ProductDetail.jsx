@@ -1,41 +1,61 @@
 import {React} from 'react';
 import classes from './ProductDetail.module.css'
-import Index from '../UI/RatingStars/Index'
+import RatingStars from "../UI/RatingStars/Index";
 import {Link} from 'react-router-dom'
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook"
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import AddButton from '../UI/Button/AddButton';
+//import AddButton from '../UI/Button/AddButton';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import WishButton from '../UI/Button/WishButton';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Footer from '../UI/Footer';
 import RawMaterialFood from './RawMaterialFood';
-
-
-
+import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import api from '../../redux/axios'
 
 
 
 const ProductDetail = () => {
+    const navigate = useNavigate();
+    const {id_item} = useParams();
     const [value, setValue] = useState(1);
-        const toggleTab = (index) => {
-            setValue(index);
+    const [items,setItems] = useState([])
+
+    useEffect(() => {
+        
+        async function getData(){
+          const res = await api.get(`/items/detail/${id_item}`)
+          return res
         }
+        getData().then((res) => {
+          setItems(res.data[0])
+        })
+        getData().catch((err) => {
+          console.log(err)
+        })
+        console.log(1)
+    },[id_item])
+
+    console.log(items)
+    const toggleTab = (index) => {
+            setValue(index);
+    }
     
     return (
         <section style={{marginTop:'4.75rem'}}>
             <div className='container' style={{marginTop:'200px'}}>
               <div className={classes['wrapper']}>
                 <div className={classes['main-image']}>
-                    <img src="https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/24-1.png" alt="Image" width="100%"></img>
+                    <img src={items.image} alt="Image" width="100%"></img>
                 </div>
                 <div className={classes['des-food']}>
-                    <h1 className={classes['food-name']}>Iced Tea</h1>
-                    <Index/>
-                    <p>Browse unique Coca-Cola products, clothing, & accessories, or customize Coke bottles and gifts</p>
-                    <h1 className={classes['price']}>Giá: 30000</h1>
+                    <h1 className={classes['food-name']}>{items.name}</h1>
+                    <RatingStars rating={items.rating} />
+                    <p>{items.description}</p>
+                    <h1 className={classes['price']}>Giá: {items.price} VNĐ</h1>
                     <hr></hr>
                     <div className={classes['add-main']}>          
                         <button className={classes['button-add']}><ShoppingBasketIcon className={classes['icon-add']}></ShoppingBasketIcon>ADD TO CART</button> 
@@ -47,7 +67,7 @@ const ProductDetail = () => {
                     </div>
                     <hr style={{marginBottom:'2.5rem'}}></hr>
                     <div className={classes['category-itiem']}>
-                        <p>Category:  <Link className={classes['link-itiem']} to="/">Pasta</Link></p>
+                        <p>Category:  <Link className={classes['link-itiem']} to="/menu">{items.name_type}</Link></p>
                         <p>Share: <tab/>  
                             <Link to="/"><FacebookIcon className={classes['icon-category']} color="disabled"/></Link>
                             <Link to="/"><YouTubeIcon className={classes['icon-category']} color="disabled"/></Link>

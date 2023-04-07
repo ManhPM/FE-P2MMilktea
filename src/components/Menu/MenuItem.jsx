@@ -1,45 +1,22 @@
-import classes from "./MenuItem.module.css";
+import React from "react";
+import classes from './MenuItem.module.css'
+import { Link } from "react-router-dom";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "./ListItem";
 
-const SubItem = (props) => {
-  const price = Number(props.item.price).toLocaleString("en");
-
-  return (
-    <li className="d-flex">
-      <div className={classes.image}>
-        <img src={props.item.image} alt="hình ảnh sản phẩm" />
-      </div>
-      <div className="w-100 d-flex flex-column" style={{marginLeft: "20px"}}>
-        <div
-          className="d-flex justify-content-between align-items-center"
-          style={{
-            borderBottom: "2px dotted var(--grey-dark)",
-            paddingBottom: "8px",
-          }}
-        >
-          <h5 className={classes.name}>{props.item.name}</h5>
-          <span className={classes.price}>{price} VND</span>
+const MenuItem = () =>{
+    return (
+        <div>
+            <div className={classes['main-content']}>
+                <div style={{margin:'auto'}}>
+                <h1 className='display-5  text-center align-baseline'>Thực Đơn</h1>
+                <p className="text-center "><Link to='/' style={{color:'var(--grey-dark)'}}>Home</Link><ChevronRightIcon/>Thực đơn</p>
+                </div>
+                
+            </div>
+            <ListItem/>
         </div>
-        <div className={classes.ingre}>{props.item.ingredients}</div>
-      </div>
-    </li>
-  );
-};
-
-const MenuItem = (props) => {
-  const { items: foods } = props;
-
-  if (!foods || !foods.length === 0) return <p>Không có đồ ăn nào</p>;
-
-  return (
-    <div className={classes.item}>
-      <h3 className={classes.header}>{props.type}:</h3>
-      <ul className="d-flex flex-column" style={{ marginTop: "10px" }}>
-        {foods.map((food, idx) => (
-          <SubItem item={food} key={idx}/>
-        ))}
-      </ul>
-    </div>
-  );
-};
+    )
+}
 
 export default MenuItem;

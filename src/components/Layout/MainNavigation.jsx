@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import classes from "./MainNavigation.module.css";
 
 import Container from "react-bootstrap/Container";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 
 import Logo from "../UI/Elements/Logo";
 import scooterIcon from "../../assets/icons/scooter.png";
@@ -19,6 +19,7 @@ import SideCart from "../UI/Modal/SideCart";
 import MobileMenu from "./MobileMenu";
 
 const MainNavigation = () => {
+  const navigate = useNavigate()
   const [authenticationIsOpen, setAuthenticationIsOpen] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
@@ -57,6 +58,23 @@ const MainNavigation = () => {
     else if (cartIsOpen) setCartIsOpen(false);
     else if (mobileMenuIsOpen) setMobileMenuIsOpen(false);
   };
+  
+  const handleClickLoginSucces = () => {
+    if(localStorage.getItem('token')){ return(
+        navigate("/profile")
+    )}
+    else {return(
+      setMobileMenuIsOpen(false),
+      setAuthenticationIsOpen(true)
+    )} 
+  };
+
+  useEffect(() => {
+    if(localStorage.getItem('token')){ return(
+      setAuthenticationIsOpen(false)
+  )}
+  })
+
 
   return (
     <div className={classes.menu}>
@@ -90,7 +108,7 @@ const MainNavigation = () => {
               </li>
               <li className={classes["menu-item"]}>
                 <NavLink
-                  to="/shop"
+                  to="/menu"
                   className={(props) => (props.isActive ? classes.active : "")}
                 >
                   Thực đơn
@@ -136,7 +154,7 @@ const MainNavigation = () => {
             </div>
             <div className={`d-flex align-items-center ${classes["mn-btn"]}`}>
               <MenuButton icon={<SearchTwoToneIcon />} />
-              <MenuButton icon={<PersonIcon />} onClick={openAuthHandler} />
+              <MenuButton icon={<PersonIcon />} onClick={handleClickLoginSucces} />
               <NavLink
                 to="/wish-list"
                 className={(props) =>
@@ -164,7 +182,7 @@ const MainNavigation = () => {
           <MobileMenu
             onClose={closeMobileMenuHandler}
             isOpen={mobileMenuIsOpen}
-            openAuth={openAuthHandler}
+            openAuth={handleClickLoginSucces}
           />
         </div>
       </Container>

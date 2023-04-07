@@ -1,23 +1,26 @@
 import { useFormik } from "formik";
-
+import { useState, useEffect, useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import { Fragment } from "react";
-
+import api from '../../../../redux/axios'
+import AuthContext from "../../../../redux/Authprovider";
 import classes from "./Authentication.module.css";
 import LabledInput from "../../Input/LabledInput";
 import Button from "../../Button/index";
 
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
+
+
 const validateLogin = (values) => {
   const errors = {};
 
-  if (!values.email || values.email.trim().length === 0) {
-    errors.email = "Xin hãy nhập email !";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Email không hợp lệ !";
+  if (!values.username || values.username.trim().length === 0) {
+    errors.username = "Xin hãy nhập username của bạn !";
+  } else if (!/^[A-Za-z]+$/.test(values.username)) {
+    errors.username = "Tên không hợp lệ !";
   }
 
   if (!values.password || values.password.trim().length === 0) {
@@ -30,6 +33,11 @@ const validateLogin = (values) => {
 };
 
 const LoginForm = (props) => {
+  const {setAuth} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [success,setSuccess] = useState(false);
+ 
+
   const formikLogin = useFormik({
     initialValues: {
       email: "",
@@ -38,24 +46,51 @@ const LoginForm = (props) => {
     validate: validateLogin,
     onSubmit: (values, { resetForm }) => {
       resetForm();
+      console.log(values);
+      handlesubmit(values);
     },
   });
 
+  const handlesubmit = async(values) => {
+    try{
+        const res = await api.post("/account/login",values);
+        console.log(res)
+        navigate("/menu")
+        setSuccess(true)
+        const name = res.data.userInfo.name
+        const id_customer = res.data.userInfo.id_customer
+        const email = res.data.userInfo.email
+        const phone = res.data.userInfo.phone
+        const address = res.data.userInfo.address
+        const id_account = res.data.userInfo.id_account
+        
+        setAuth({name,id_customer,id_account,phone,address,email})
+        localStorage.setItem('token',res.data.token);
+        localStorage.setItem('timeOut',res.data.expireTime)
+        
+        
+    }
+    catch(err){
+        console.log(err)
+    } 
+}
+    
+
   return (
-    <form onSubmit={formikLogin.onSubmit}>
+    <form onSubmit={formikLogin.handleSubmit}>
       <LabledInput
-        name="email"
-        label="Email"
-        placeholder="Nhập Email"
-        required={true}
-        value={formikLogin.values.email}
-        onChange={formikLogin.handleChange}
-        onBlur={formikLogin.handleBlur}
-        error={
-          formikLogin.touched.email && formikLogin.errors.email
-            ? formikLogin.errors.email
+         name="username"
+         label="username"
+         placeholder="Nhập username"
+         required={true}
+         value={formikLogin.values.username}
+         onChange={formikLogin.handleChange}
+         onBlur={formikLogin.handleBlur}
+         error={
+          formikLogin.touched.username && formikLogin.errors.username
+            ? formikLogin.errors.username
             : null
-        }
+         }
       />
       <LabledInput
         name="password"
@@ -85,6 +120,11 @@ const LoginForm = (props) => {
   );
 };
 
+
+
+
+
+
 const Authentication = (props) => {
   const authClasses = `${classes[`${props.className}`]} ${
     classes["auth-wrapper"]
@@ -93,17 +133,17 @@ const Authentication = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <div className={authClasses}>
+         <div className={authClasses}>
           <div className={classes.wrapper}>
             <header className="my-3 d-flex justify-content-between">
               <h1 className={classes["form-header"]}>Đăng nhập</h1>
               <button onClick={props.onClose} className={classes.close}>
                 <CloseIcon />
               </button>
-            </header>
-            <LoginForm onClose={props.onClose} />
+           </header>
+           <LoginForm onClose={props.onClose} />
           </div>
-        </div>,
+         </div>,
         document.getElementById("overlay-root")
       )}
     </Fragment>
