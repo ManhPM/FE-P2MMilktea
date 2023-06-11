@@ -79,14 +79,14 @@ const MainSlider = () => {
       <Carousel fade pause={false} interval={5000}>
         {sliderItems.map((item) => (
           <Carousel.Item
-            className="item"
+            className="item w-100 d-block"
             key={item.id}
             style={{ backgroundImage: `url(${item.img})` }}
           >
             <Carousel.Caption
               className={`${classes["slider-caption"]} container overflow-hidden`}
             >
-              <Row className="w-100 m-0">
+              {/* <Row className="w-100 m-0">
                 <Col
                   lg={6}
                   md={5}
@@ -121,9 +121,9 @@ const MainSlider = () => {
                     <img src={item.objImg} alt="object" className="obj-img" />
                   </div>
                 </Col>
-              </Row>
+              </Row> */}
             </Carousel.Caption>
-            <img
+            {/* <img
               src={chillies}
               alt="chillies"
               className={`chillies item-object`}
@@ -131,7 +131,7 @@ const MainSlider = () => {
             <img src={leaf2} alt="leaf2" className={`leaf-2 item-object`} />
             <img src={leaf1} alt="leaf1" className={`leaf-1 item-object`} />
             <img src={salad} alt="salad" className={`salad item-object`} />
-            <img src={potato} alt="potato" className={`potato item-object`} />
+            <img src={potato} alt="potato" className={`potato item-object`} /> */}
           </Carousel.Item>
         ))}
       </Carousel>

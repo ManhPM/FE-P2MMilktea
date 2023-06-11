@@ -4,7 +4,7 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import RatingStars from "../UI/RatingStars/Index";
 import Footer from "../UI/Footer/index";
 import { useState,useEffect } from "react";
-import api from '../../redux/axios';
+import api from '../../apiRequest/axios';
 import { useNavigate } from "react-router-dom";
 
 
@@ -13,7 +13,10 @@ const ListItem = () =>{
     const [listItems,setListItems] = useState([])
     const [types, setTypes] = useState([])
     const [activeTypes, setActiveTypes] = useState(1)
+    const token = localStorage.getItem('token')
     const navigate = useNavigate();
+    const quantity = {quantity: 1}
+    //api lay loại hàng
     const getTypes = async() => {
         const res = await api.get("/types")
         return res
@@ -44,6 +47,8 @@ const ListItem = () =>{
         })
     },[])
     
+
+    //api lấy danh sách item
     const fetchData = async (id_type) => {
         const res = await api.get(`/items?id_type=${id_type}`)
         const data = res.data.itemList;
@@ -57,8 +62,21 @@ const ListItem = () =>{
         setListItems(currentData);
         setActiveTypes(id_type);
     }
-    console.log()
     console.log(listItems)
+    const handleAddToCart = async (id_item) => {
+        api.post(`cart/add/${id_item}`,quantity,
+        {
+            headers: {
+                access_token: token
+            }
+        })
+        .then(function (res) {
+            console.log(res) 
+        })
+        .catch(function (res) {
+            console.log(res)
+        });
+    }
     return (
         <div>
             <div className="container">
@@ -109,7 +127,9 @@ const ListItem = () =>{
                                 </div>
                                 </div>
                                 <div className={classes['des-icon']}>
-                                <div className={classes['icon-add']}>
+                                <div className={classes['icon-add']}
+                                    onClick={() => handleAddToCart(listItem.id_item)}
+                                >
                                   <ShoppingBasketIcon></ShoppingBasketIcon>
                                 </div>
                                 </div>

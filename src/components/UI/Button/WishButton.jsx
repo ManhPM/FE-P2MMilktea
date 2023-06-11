@@ -8,7 +8,7 @@ const WishButton = (props) => {
   const { itemId } = props;
   
   return (
-    <Link className={classes.btn} to={`add-to-wish-list/${itemId}`}>
+    <Link className={classes.btn}>
       <FavoriteIcon />
     </Link>
   );

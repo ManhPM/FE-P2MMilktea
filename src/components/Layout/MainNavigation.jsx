@@ -124,10 +124,10 @@ const MainNavigation = () => {
               </li>
               <li className={classes["menu-item"]}>
                 <NavLink
-                  to="/book-table"
+                  to="/orders"
                   className={(props) => (props.isActive ? classes.active : "")}
                 >
-                  Đặt bàn
+                  Đơn Hàng
                 </NavLink>
               </li>
               <li className={classes["menu-item"]}>
@@ -141,7 +141,7 @@ const MainNavigation = () => {
             </ul>
           </nav>
           <div className={classes["fn-wrapper"]}>
-            <div className={classes["ship-icon"]}>
+            {/* <div className={classes["ship-icon"]}>
               <img src={scooterIcon} alt="shipping-icon" />
             </div>
             <div className={classes["ship-desc"]}>
@@ -151,7 +151,7 @@ const MainNavigation = () => {
               <h3>
                 <span className={classes.phone}>+ 1 123 456 789</span>
               </h3>
-            </div>
+            </div> */}
             <div className={`d-flex align-items-center ${classes["mn-btn"]}`}>
               <MenuButton icon={<SearchTwoToneIcon />} />
               <MenuButton icon={<PersonIcon />} onClick={handleClickLoginSucces} />
@@ -165,7 +165,7 @@ const MainNavigation = () => {
               </NavLink>
               <MenuButton
                 icon={<ShoppingBasketIcon />}
-                quantity={5}
+                quantity=""
                 onClick={openCartHandler}
               />
             </div>

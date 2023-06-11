@@ -4,8 +4,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { NavLink,useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import { Fragment } from "react";
-import api from '../../../../redux/axios'
-import AuthContext from "../../../../redux/Authprovider";
+import api from '../../../../apiRequest/axios'
+import AuthContext from "../../../../apiRequest/Authprovider";
 import classes from "./Authentication.module.css";
 import LabledInput from "../../Input/LabledInput";
 import Button from "../../Button/index";
@@ -18,16 +18,16 @@ const validateLogin = (values) => {
   const errors = {};
 
   if (!values.username || values.username.trim().length === 0) {
-    errors.username = "Xin hãy nhập username của bạn !";
-  } else if (!/^[A-Za-z]+$/.test(values.username)) {
-    errors.username = "Tên không hợp lệ !";
-  }
+    errors.username = "Xin hãy nhập username của bạn !"; }
+  // } else if (!/^[A-Za-z]+$/.test(values.username)) {
+  //   errors.username = "Tên không hợp lệ !";
+  // }
 
   if (!values.password || values.password.trim().length === 0) {
-    errors.password = "Xin hãy nhập mật khẩu !";
-  } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(values.password)) {
-    errors.password = "Mật khẩu không hợp lệ !";
-  }
+    errors.password = "Xin hãy nhập mật khẩu !"; }
+  // } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(values.password)) {
+  //   errors.password = "Mật khẩu không hợp lệ !";
+  // }
 
   return errors;
 };
@@ -63,7 +63,7 @@ const LoginForm = (props) => {
         const phone = res.data.userInfo.phone
         const address = res.data.userInfo.address
         const id_account = res.data.userInfo.id_account
-        
+        console.log(res.data.token)
         setAuth({name,id_customer,id_account,phone,address,email})
         localStorage.setItem('token',res.data.token);
         localStorage.setItem('timeOut',res.data.expireTime)

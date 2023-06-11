@@ -14,15 +14,17 @@ import Footer from '../UI/Footer';
 import RawMaterialFood from './RawMaterialFood';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import api from '../../redux/axios'
+import api from '../../apiRequest/axios'
 
 
 
 const ProductDetail = () => {
+    const token = localStorage.getItem('token')
     const navigate = useNavigate();
     const {id_item} = useParams();
     const [value, setValue] = useState(1);
     const [items,setItems] = useState([])
+    const quantity = {quantity: 1}
 
     useEffect(() => {
         
@@ -31,7 +33,7 @@ const ProductDetail = () => {
           return res
         }
         getData().then((res) => {
-          setItems(res.data[0])
+          setItems(res.data.item[0])
         })
         getData().catch((err) => {
           console.log(err)
@@ -39,6 +41,34 @@ const ProductDetail = () => {
         console.log(1)
     },[id_item])
 
+    const handleAddToCart = async (id_item) => {
+        api.post(`cart/add/${id_item}`,quantity,
+        {
+            headers: {
+                access_token: token
+            }
+        })
+        .then(function (res) {
+            console.log(res) 
+        })
+        .catch(function (res) {
+            console.log(res)
+        });
+    }
+    const handleWishList = async (id_item) => {
+        api.post(`wishlist/${id_item}`,{},
+        {
+            headers: {
+                access_token: token
+            }
+        })
+        .then(function (res) {
+            console.log(res) 
+        })
+        .catch(function (res) {
+            console.log(res)
+        });
+    }
     console.log(items)
     const toggleTab = (index) => {
             setValue(index);
@@ -58,9 +88,14 @@ const ProductDetail = () => {
                     <h1 className={classes['price']}>Giá: {items.price} VNĐ</h1>
                     <hr></hr>
                     <div className={classes['add-main']}>          
-                        <button className={classes['button-add']}><ShoppingBasketIcon className={classes['icon-add']}></ShoppingBasketIcon>ADD TO CART</button> 
-                        <div className={classes['wish-button']}>
-                            <div className={classes['wish-icon']}>
+                        <button className={classes['button-add']}
+                            onClick={() => handleAddToCart(items.id_item)}
+                        ><ShoppingBasketIcon className={classes['icon-add']}></ShoppingBasketIcon>ADD TO CART</button> 
+                        <div className={classes['wish-button']}
+                            onClick={() => handleWishList(items.id_item)}
+                        >
+                            <div className={classes['wish-icon']}
+                            >
                                 <WishButton/>
                             </div>
                         </div>

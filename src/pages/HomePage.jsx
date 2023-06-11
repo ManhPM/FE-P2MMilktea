@@ -16,7 +16,7 @@ const HomePage = () => {
       <Advertise />
       <HomePageFoods />
       <HealthyAd />
-      <SubSlider />
+      {/* <SubSlider /> */}
       <Footer/>
     </div>
   );

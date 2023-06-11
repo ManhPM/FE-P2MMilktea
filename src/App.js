@@ -8,9 +8,11 @@ import WishList from './pages/WishList';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Menu from './pages/Menu';
 import Profile from './components/Profile/Profile';
+import CheckOut from './components/CheckOut/CheckOut';
+import Oders from './pages/Oders';
+import OrderDetail from './components/ListOrders/OderDetail';
 
 function App() {
-  console.log('Hello word')
 
   return (
     <div className="App">
@@ -22,6 +24,9 @@ function App() {
           <Route path="/product-detail/:id_item" element={<ProductDetail/>} />
           <Route path="/menu" element={<Menu/>} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/check-out" element={<CheckOut/>} />
+          <Route path="/orders" element={<Oders/>} />
+          <Route path="/orders/:id_order" element={<OrderDetail/>} />
         </Routes>
       </Layout>
     </div>

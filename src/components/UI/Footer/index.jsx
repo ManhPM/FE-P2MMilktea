@@ -20,7 +20,7 @@ const Footer = () => {
       <div className={classes["header-logo"]}>
         <div className={classes["container-logo"]}>
           <div className={classes.logo}>
-            <img src={logo} alt="logo" />
+            <img src={logo}  alt="logo" style={{width: "100px", height: "100px"}} />
           </div>
         </div>
       </div>

@@ -1,0 +1,119 @@
+.main-container{
+    background-color: #e2e8f0;
+    height: 100%;
+    height: 700px;
+}
+
+.user-info{
+    display:block;
+    align-items: center;
+    width: 80%;
+    background-color: #fff;
+    margin-top: 50px;
+}
+.main-title{
+    text-align:center;
+    margin-bottom: 50px;
+    padding-top: 20px;
+}
+.main-title > h5 {
+    font-size:30px;
+    font-weight: 600;
+}
+
+.data-user{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+}
+.title{
+    width:20%;
+}
+.title > h6 {
+    color: #1a202c;
+    font-weight: 600;
+    font-size: 17px;
+}
+.value-info{
+    width:80%;
+}
+.value-info > h5 {
+    color: #6c757d;
+}
+
+.log-out{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.log-out > button {
+    margin-left: 20px;
+    width:100px;
+    height: 40px;
+    background-color: #5bc0de;
+    border-radius: 6px;
+    color:#000;
+    border-color: #46b8da
+}
+.log-out > button:hover{
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+
+
+.info-pay{
+    display:block;
+    align-items: center;
+    
+    background-color: #fff;
+    margin-top: 50px;
+    
+}
+
+.pay-user{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title-pay{
+    width:60%;
+}
+.pay-info{
+    width:40%;
+    font-size: 17px;
+}
+.pay-info > h5 {
+    color: #1a202c;
+    font-weight: 600;
+    font-size: 17px;
+}
+.total-pay{
+    padding-bottom: 20px;
+    margin-left: 20px;
+}
+.total-pay > .title-pay > h6 {
+    color: #1a202c;
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-container{
+        height:100%;
+    }
+    .info-pay{
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    .user-info{
+        width: 100%;
+    }
+}

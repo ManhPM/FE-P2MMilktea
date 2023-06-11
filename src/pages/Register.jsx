@@ -1,6 +1,6 @@
 import {React, useState} from 'react';
 import { useFormik } from "formik";
-import axios from '../redux/axios';
+import api from '../apiRequest/axios';
 import { useNavigate } from 'react-router-dom';
 //import CloseIcon from "@mui/icons-material/Close";
 //import { NavLink } from "react-router-dom";
@@ -56,7 +56,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handlesubmit = (values) => {
-      axios.post(`http://localhost:3005/account/create`,values)
+      api.post(`/account/create`,values)
       .then(function (res) {
         console.log(res)
         alert('Đăng Ký Thành công'); 

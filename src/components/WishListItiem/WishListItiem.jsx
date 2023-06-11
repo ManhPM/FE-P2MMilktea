@@ -4,6 +4,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import AddButton from '../UI/Button/AddButton';
 import Table from 'react-bootstrap/Table';
 import {Link} from 'react-router-dom'
+import { useState,useEffect } from 'react';
+import api from '../../apiRequest/axios'
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -67,8 +69,45 @@ const Listitiem = [
 
 
 const WishListItiem = () => {
+    const token = localStorage.getItem('token')
+    const quantity = {quantity: 1}
+    const [wishLists,setWishLists] = useState([])
+
+  const getData = async() => {
+    const res = await api.get("/wishlist",{
+      headers:{
+        access_token: token
+      }
+    })
+    return res
+  }
+  useEffect(() => {
     
-    
+      getData().then((res) => {
+        setWishLists(res.data)
+        
+      })
+      getData().catch((err) => {
+        console.log(err)
+      })
+  },[])
+  console.log(wishLists.length)
+  const handleAddToCart = async (id_item) => {
+    api.post(`cart/add/${id_item}`,quantity,
+    {
+        headers: {
+            access_token: token
+        }
+    })
+    .then(function (res) {
+        console.log(res) 
+    })
+    .catch(function (res) {
+        console.log(res)
+    });
+  }
+
+
     return(
         <div>
             <div className={classes['main-content']}>
@@ -83,18 +122,17 @@ const WishListItiem = () => {
                     style={{marginBottom:'6rem'}}
                 > 
                     <tbody>
-                        {Listitiem.map((item =>{
+                        {wishLists.map((wishList =>{
                             return (
-                                <tr key={item.id}>
-                                    <td className={classes['column-image']}><Link to="/"><img src={item.image} alt="food image" width="90px" height="90px"></img></Link></td>
+                                <tr key={wishList.id_item}>
+                                    <td className={classes['column-image']}><Link to="/"><img src={wishList.image} alt="food image" width="90px" height="90px"></img></Link></td>
                                     <td className={classes['column-des']}>
-                                        <div><Link className={classes['name-itiem']} to="/">{item.name}</Link></div>
-                                        <div>Giá: {item.price}</div>
-                                        <div>{item.date}</div>
+                                        <div><Link className={classes['name-itiem']} to="/">{wishList.name}</Link></div>
+                                        <div>Giá: {wishList.price}</div>
+                                        <div>20-11-2021</div>
                                     </td>
                                     <td className='align-middle'>
-                                        <AddButton>Add To Card</AddButton>
-                                        <AddButton>Remove</AddButton>
+                                        <AddButton onClick={() => handleAddToCart(wishList.id_item)}>Add To Card</AddButton>
                                     </td>
                                 </tr>
                             )

@@ -17,7 +17,7 @@ const SideCartList = (props) => {
   return (
     <ul className={classes.list}>
       {cartItems.map((item) => (
-        <SideCartItem key={item.id} item={item}/>
+        <SideCartItem key={item.id_item} item={item}/>
       ))}
     </ul>
   );
