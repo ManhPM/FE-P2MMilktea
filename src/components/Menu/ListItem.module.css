@@ -48,6 +48,8 @@
     border: 1px solid;
     border-color: #ededed;
     position: relative;
+    /* background-color: var(--primary);
+    opacity: 0.1; */
 
 }
 .image-item{

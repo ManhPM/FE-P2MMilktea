@@ -1,20 +1,81 @@
-import { useEffect,useContext } from "react"
+import { useEffect,useContext,useState } from "react"
 import { useNavigate } from "react-router-dom"
-import AuthContext from "../../apiRequest/Authprovider"
-import classes from './Profile.module.css'
 import { Link } from "react-router-dom"
 
 
+import AuthContext from "../../apiRequest/Authprovider"
+import classes from './Profile.module.css'
+import api from '../../apiRequest/axios';
+
 const Profile = () => {
+    const token = localStorage.getItem('token')
+    const [info,setInfo] = useState({})
     const navigate = useNavigate()
-    const user = useContext(AuthContext)
-    console.log(user.auth)
+    // const {auth,setAuth} = useContext(AuthContext)
+
+    // console.log(auth)
+
+
+    const getInfo = async() => {
+        const res = await api.get("/account/userinfo",{
+            headers: {
+                access_token: token
+            }
+        })
+        return res
+    }
+
     useEffect(()=>{
         if(!localStorage.getItem('token')){
             navigate("/")
         }
-    
+        getInfo().then((res) => {
+            setInfo(res.data.userInfo)
+            // console.log(res)
+        })
+        getInfo().catch((err) => {
+            console.log(err)
+        })
     },[])
+
+    // console.log(info)
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+
+        try{
+        {
+            api.put(`account/updateprofile`, {
+                name: info.name,
+                phone: info.phone,
+                address: info.address
+            },
+                {
+                    headers: {
+                        Access_token: token,
+                    }
+                }
+            )
+            .then(res =>{
+                alert("cập nhập thành công")
+                navigate('/')
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+            
+        }
+        
+        }catch(error){
+            console.log(error);
+        }
+        
+    }
+    const handleChange= (e) => {
+        setInfo(info => ({
+          ...info,  
+          [e.target.name]: e.target.value
+        }));
+    }
     return(
         <div style={{marginTop:"100px"}} className={classes["main-container"]}>
             <div className="container">
@@ -29,7 +90,7 @@ const Profile = () => {
                                     <h6>Tên</h6>
                                 </div>
                                 <div className={classes["value-info"]}>
-                                    <h5>Đỗ Đức Hậu</h5>
+                                    <input name="name" value={info.name} type="text" onChange={handleChange}/>
                                 </div>
                             </div>
                             <hr></hr>
@@ -47,7 +108,7 @@ const Profile = () => {
                                     <h6>SDT</h6>
                                 </div>
                                 <div className={classes["value-info"]}>
-                                    <h5>0377359729</h5>
+                                    <input name="phone" value={info.phone} type="text" onChange={handleChange}/>
                                 </div>
                             </div>
                             <hr />
@@ -56,23 +117,34 @@ const Profile = () => {
                                     <h6>Địa chỉ</h6>
                                 </div>
                                 <div className={classes["value-info"]}>
-                                    <h5>Quận 9 , Thành phố Thủ Đức , TpHCM</h5>
+                                    <input 
+                                        className={classes["input-location"]}
+                                        name="address" 
+                                        value={info.address}
+                                        type="text"
+                                        onChange={handleChange}
+                                    />
                                 </div>
                             </div>
                             <hr></hr>
-                            <Link to="/" onClick={() =>{
-                                localStorage.clear()
-                            }}>
-                            <div className={classes["log-out"]}>
+                            <div className={classes["button__update"]}> 
+                                <Link to="/" onClick={() =>{
+                                    localStorage.clear()
+                                }}>
+                                <div className={classes["log-out"]}>
                                     <button>Đăng Xuất</button>
+                                </div>
+                                </Link>
+                                <div className={classes["button-update"]} onClick={handleSubmit}>
+                                    <button>Cập nhập thông tin</button>
+                                </div>
                             </div>
-                            </Link>
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
                         <div className={classes["info-pay"]}>
                             <div className={classes["main-title"]}>
-                                <h5>Thông tin giao dịch</h5>
+                                <h5>Tổng     giao dịch</h5>
                             </div>
                             <div className={classes["pay-user"]}>
                                 <div className={classes["title-pay"]}>

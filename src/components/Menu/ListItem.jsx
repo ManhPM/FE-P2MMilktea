@@ -3,11 +3,11 @@ import classes from './ListItem.module.css'
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import RatingStars from "../UI/RatingStars/Index";
 import Footer from "../UI/Footer/index";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
 import api from '../../apiRequest/axios';
 import { useNavigate } from "react-router-dom";
 
-
+import AuthContext from "../../apiRequest/Authprovider";
 
 const ListItem = () =>{
     const [listItems,setListItems] = useState([])
@@ -16,6 +16,8 @@ const ListItem = () =>{
     const token = localStorage.getItem('token')
     const navigate = useNavigate();
     const quantity = {quantity: 1}
+    // useContext
+    const {auth,setAuth} = useContext(AuthContext);
     //api lay loại hàng
     const getTypes = async() => {
         const res = await api.get("/types")
@@ -25,6 +27,8 @@ const ListItem = () =>{
       
         getTypes().then((res) => {
           setTypes(res.data)
+          console.log(res.data)
+          setAuth(res.data)
           
         })
         getTypes().catch((err) => {

@@ -15,7 +15,10 @@
     font-weight: 600;
 }
 
-
+.container__orders{
+    width:85%;
+    margin-left: 7.5%;
+}
 .cart-item{
     display:flex;
     text-align: center;

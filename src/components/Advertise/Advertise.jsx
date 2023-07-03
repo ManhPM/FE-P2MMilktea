@@ -23,10 +23,10 @@ const Advertise = () => {
     <section className="Adversisement" style={{ padding: "40px 0" }}>
       <Container fluid="lg">
         <div className={classes["ad-img"]}>
-          <Row>
+          {/* <Row>
             <Col md={5} className={classes.col}>
               <div className={classes["ad-img__item"]}>
-                <img src={firstBg} alt="first-ad" />
+                <img src="https://phuclong.com.vn/uploads/dish/e3a453a57402ee-65000307trsanhnsen.png" alt="first-ad" />
                 <div className={`${classes.content} ${classes["content-1"]}`}>
                   <h3>American</h3>
                   <h2>Burger</h2>
@@ -84,7 +84,7 @@ const Advertise = () => {
                 </div>
               </div>
             </Col>
-          </Row>
+          </Row> */}
         </div>
         <div className={classes["ad-block"]}>
           <Row className="justify-content-center">
@@ -116,8 +116,8 @@ const Advertise = () => {
                   <img src={pizza} alt="pizza" />
                 </div>
                 <div className={classes["item_content"]}>
-                  <h4>Đồ ăn chất lượng</h4>
-                  <p>Chuỗi hệ thống cửa hàng với nhiều món ăn hấp dẫn</p>
+                  <h4>Sản phẩm chất lượng</h4>
+                  <p>Chuỗi hệ thống cửa hàng với nhiều sản phẩm hấp dẫn</p>
                 </div>
               </div>
             </Col>

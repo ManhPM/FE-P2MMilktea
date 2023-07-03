@@ -6,8 +6,8 @@ import classes from './Mapbox.module.css'
 mapboxgl.accessToken = 'pk.eyJ1IjoiZHVjaGF1MDUyMSIsImEiOiJjbGlqN3l3bzgwNHZkM2txbzhiemdnZDlhIn0.L20rg56BLB6iTrMutkntMw';
 
 const Mapbox  = () => {
-    const [latitude,setLatitude] = useState(10.86195853994233)
-    const [longitude,setLongitude] = useState(106.74362380706191)
+    const [latitude,setLatitude] = useState(10.839581)
+    const [longitude,setLongitude] = useState(106.793656)
     const [viewport,setViewport] = useState({
         with: "70vw",
         height:"70vh",

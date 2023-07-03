@@ -55,7 +55,7 @@ const ListOders = () => {
             </div>
             {orders.map((order) =>{
             return(
-            <div>
+            <div className={classes["container__orders"]}>
             <div className={classes["cart-item"]} key={order.id_order}>
                 
                 <div className={classes["name-item"]}>

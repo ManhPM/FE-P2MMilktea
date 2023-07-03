@@ -165,6 +165,7 @@ const ItiemCheckOut = () => {
         .catch(function (res) {
             console.log(res)
         });
+        setValue(value + 1)
     }
     
     return (

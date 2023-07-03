@@ -33,10 +33,11 @@ const validateLogin = (values) => {
 };
 
 const LoginForm = (props) => {
-  const {setAuth} = useContext(AuthContext);
+  const {auth,setAuth} = useContext(AuthContext);
   const navigate = useNavigate();
   const [success,setSuccess] = useState(false);
- 
+  
+  
 
   const formikLogin = useFormik({
     initialValues: {
@@ -63,12 +64,9 @@ const LoginForm = (props) => {
         const phone = res.data.userInfo.phone
         const address = res.data.userInfo.address
         const id_account = res.data.userInfo.id_account
-        console.log(res.data.token)
-        setAuth({name,id_customer,id_account,phone,address,email})
+        setAuth({name,id_customer,phone,address,id_account,email})
         localStorage.setItem('token',res.data.token);
-        localStorage.setItem('timeOut',res.data.expireTime)
-        
-        
+        localStorage.setItem('timeOut',res.data.expireTime)   
     }
     catch(err){
         console.log(err)

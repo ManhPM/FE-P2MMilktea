@@ -38,11 +38,17 @@
 .value-info{
     width:80%;
 }
-.value-info > h5 {
-    color: #6c757d;
+.value-info > input {
+    height: 30px;
+    text-align: center;
+    border: none;
 }
-
-.log-out{
+.input-location{
+    width: 70%;
+    height: 30px;
+    text-align: center;
+}
+.log-out, .button-update{
     margin-top: 20px;
     padding-bottom: 20px;
     display: flex;
@@ -59,6 +65,24 @@
     border-color: #46b8da
 }
 .log-out > button:hover{
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+
+.button__update{
+    display:flex
+}
+.button-update > button {
+    margin-left: 20px;
+    width:150px;
+    height: 40px;
+    background-color: #5bc0de;
+    border-radius: 6px;
+    color:#000;
+    border-color: #46b8da
+}
+.button-update > button:hover{
     color: #fff;
     background-color: #31b0d5;
     border-color: #269abc;
