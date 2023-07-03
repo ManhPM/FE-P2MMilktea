@@ -7,6 +7,8 @@ import Table from 'react-bootstrap/Table';
 import CloseIcon from '@mui/icons-material/Close';
 import api from '../../apiRequest/axios';
 import Mapbox from "../Mapbox/Mapbox";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const ItiemCheckOut = () => {
     const token = localStorage.getItem('token')
@@ -15,13 +17,14 @@ const ItiemCheckOut = () => {
     const navigate = useNavigate();
 
     const [message,setMessage] = useState('')
+    const [error,setError] = useState('')
     const [value, setValue] = useState(1);
     const [paysmethod, setPaysmethod] = useState([]);
     const [pays,setPays] = useState('');
     const [items, setItems] = useState([])
     const [description,setDescription] = useState('Ghi Chu')
     const [shippings,setShippings] = useState([])
-    const [code,setCode] = useState('SALE10')
+    const [code,setCode] = useState('')
     const [selectedShipper, setSelectedShipper] = useState('')
     const payments = [...paysmethod]
 
@@ -50,6 +53,7 @@ const ItiemCheckOut = () => {
         })
         return res
     }
+    // console.log(pays,description,selectedShipper,latitude,longitude,code)
     const CheckOut = () => {
         try{
             {
@@ -63,18 +67,39 @@ const ItiemCheckOut = () => {
                 },
                     {
                         headers: {
-                            Access_token: token,
+                            access_token: token,
                         }
                     }
                 )
                 .then(res =>{
-                    setMessage("Đặt Hàng Thành Công")
+                    
                     navigate('/check-out')
                     console.log(res)
                     setValue(value + 1)
+                    toast.success('Đặt Hàng Thành Công', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
                 })
                 .catch(err =>{
+                    
                     console.log(err)
+                    toast.error('Thao tác thất bại', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                 })
             }
             
@@ -129,10 +154,31 @@ const ItiemCheckOut = () => {
             }
         })
         .then(function (res) {
-            console.log(res) 
+            console.log(res)
+            toast.success('Tăng số lượng thành công', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setValue(value + 1) 
         })
         .catch(function (res) {
             console.log(res)
+            toast.error('Thao tác thất bại', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         });
         setValue(value + 1)
     }
@@ -145,10 +191,31 @@ const ItiemCheckOut = () => {
             }
         })
         .then(function (res) {
-            console.log(res) 
+            console.log(res)
+            toast.success('Giảm số lượng thành công', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }); 
+            setValue(value - 1)
         })
         .catch(function (res) {
             console.log(res)
+            toast.error('Thao tác thất bại', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         });
         setValue(value - 1)
     }
@@ -160,10 +227,31 @@ const ItiemCheckOut = () => {
             }
         })
         .then(function (res) {
-            console.log(res) 
+            console.log(res)
+            setValue(value + 1)
+            toast.success('Đã xoá khỏi giỏ hàng', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }); 
         })
         .catch(function (res) {
             console.log(res)
+            toast.warn('Thao tác thất bại', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         });
         setValue(value + 1)
     }
@@ -202,6 +290,9 @@ const ItiemCheckOut = () => {
             <div className={classes["message"]}>
                 <p>{message}</p>
             </div>
+            <div className={classes["handle__error"]}>
+                <p>{error}</p>
+            </div>
             <div className={classes["payment__map"]}>
             <div className={classes["payment__method"]}>
             <p>Chọn Phương thức thanh toán:</p>
@@ -236,6 +327,18 @@ const ItiemCheckOut = () => {
                     Đặt Hàng
                 </button>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
         
     )

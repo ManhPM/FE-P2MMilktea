@@ -56,6 +56,14 @@
     font-size:26px;
     color: lime;
 }
+.handle__error{
+    display:flex;
+    justify-content: center;
+}
+.handle__error > p {
+    font-size:26px;
+    color: red;
+}
 
 
 .set__payment{

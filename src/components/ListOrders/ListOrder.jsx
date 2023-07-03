@@ -35,18 +35,18 @@ const ListOders = () => {
         const order = e.value
         //console.log(order)
         if(order==0){
-            return(
-                <div className={classes["status-wait"]}>
-                <p className={classes['text-wait']} >Chưa xác nhận </p>
-                </div>
+            return(    
+                <p className={classes['text-wait']} >Chưa xác nhận </p>   
             )
         }
         if(order==1){
-            return <p className={classes['text-confirm']} >Đã xác nhận </p>
-        }
+            return ( 
+                <p className={classes['text-confirm']} >Đã xác nhận </p>
+        )}
         else{
-            return <p className={classes['text-cancel']}>Đã huỷ</p>
-        }
+            return (
+                <p className={classes['text-cancel']} >Đã Huỷ </p>
+        )}
     }
     return (
         <div className={classes["container"]}>
@@ -58,6 +58,7 @@ const ListOders = () => {
             <div className={classes["container__orders"]}>
             <div className={classes["cart-item"]} key={order.id_order}>
                 
+
                 <div className={classes["name-item"]}>
                     <p onClick={() => navigate(`/orders/${order.id_order}`)}> 
                         Đơn hàng ngày: {order.time_order}

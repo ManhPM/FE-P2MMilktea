@@ -1,6 +1,8 @@
 import { useEffect,useContext,useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import AuthContext from "../../apiRequest/Authprovider"
@@ -56,11 +58,32 @@ const Profile = () => {
                 }
             )
             .then(res =>{
-                alert("cập nhập thành công")
-                navigate('/')
+                toast.success('Cập nhập thông tin thành công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
             })
             .catch(err =>{
                 console.log(err)
+                toast.error('Thao tác thất bại', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
             })
             
         }
@@ -99,7 +122,7 @@ const Profile = () => {
                                     <h6>Email</h6>
                                 </div>
                                 <div className={classes["value-info"]}>
-                                    <h5>Duchau051113@gmail.com</h5>
+                                    <h5>{info.email}</h5>
                                 </div>
                             </div>
                             <hr></hr>
@@ -183,6 +206,18 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </div>
     )
 }

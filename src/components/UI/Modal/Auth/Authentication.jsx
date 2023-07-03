@@ -36,6 +36,7 @@ const LoginForm = (props) => {
   const {auth,setAuth} = useContext(AuthContext);
   const navigate = useNavigate();
   const [success,setSuccess] = useState(false);
+  const [errors,setError] = useState("");
   
   
 
@@ -70,12 +71,14 @@ const LoginForm = (props) => {
     }
     catch(err){
         console.log(err)
+        setError("Sai thông tin đăng nhập")
     } 
 }
     
 
   return (
     <form onSubmit={formikLogin.handleSubmit}>
+      <p className={classes["errors__login"]}>{errors}</p>
       <LabledInput
          name="username"
          label="username"
@@ -135,6 +138,7 @@ const Authentication = (props) => {
           <div className={classes.wrapper}>
             <header className="my-3 d-flex justify-content-between">
               <h1 className={classes["form-header"]}>Đăng nhập</h1>
+              {/* <p>Sai thông tin đăng nhập</p> */}
               <button onClick={props.onClose} className={classes.close}>
                 <CloseIcon />
               </button>

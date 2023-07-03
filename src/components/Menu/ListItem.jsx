@@ -6,6 +6,8 @@ import Footer from "../UI/Footer/index";
 import { useState,useEffect,useContext } from "react";
 import api from '../../apiRequest/axios';
 import { useNavigate } from "react-router-dom";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 import AuthContext from "../../apiRequest/Authprovider";
 
@@ -75,10 +77,30 @@ const ListItem = () =>{
             }
         })
         .then(function (res) {
-            console.log(res) 
+            console.log(res)
+            toast.success('Thêm hàng thành công', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                }); 
         })
         .catch(function (res) {
             console.log(res)
+            toast.error('Thêm hàng thất bại', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         });
     }
     return (
@@ -144,6 +166,18 @@ const ListItem = () =>{
                     
                     
                     </div>
+                    <ToastContainer 
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
                 </div>
             </div>
             <Footer/>

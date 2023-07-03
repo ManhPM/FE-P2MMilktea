@@ -1,6 +1,9 @@
 import React from "react";
 import {useState,useEffect} from 'react'
 import { useParams,useNavigate } from "react-router-dom";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import api from '../../apiRequest/axios';
 import classes from './OderDetail.module.css'
@@ -41,7 +44,20 @@ const OrderDetail = () => {
                     access_token: token
                 }
             })
-            navigate('/orders')
+            toast.success('Đã Huỷ Đơn Hàng', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            setTimeout(() => {
+                navigate('/orders')
+            }, 2000);
+            // navigate('/orders')
         } catch (error) {
             console.log(error);
         }
@@ -64,8 +80,20 @@ const OrderDetail = () => {
                 </div>
             )
         }
-        if(order==1){
-            return <p className={classes['text-confirm']} >Đã xác nhận </p>
+        if(order===1){
+            return <div><p className={classes['text-confirm']} >Đã xác nhận </p> 
+                        <p className={classes['text-wait']}>Chờ vận chuyển</p>
+            </div>
+        }
+        if(order===3){
+            return <div><p className={classes['text-confirm']} >Đã xác nhận </p> 
+                        <p className={classes['text-wait']}>Đang giao hàng</p>
+            </div>
+        }
+        if(order===4){
+            return <div><p className={classes['text-confirm']} >Đã xác nhận </p> 
+                        <p className={classes['text-confirm']}>Đơn hàng hoàn thành</p>
+            </div>
         }
         else{
             return <p className={classes['text-cancel']}>Đã huỷ</p>
@@ -148,6 +176,18 @@ const OrderDetail = () => {
                                 </div>
                             </div>
                         </div>
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="colored"
+                        />
                     </div>
             </div>
         </div>

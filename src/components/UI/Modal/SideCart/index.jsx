@@ -45,22 +45,22 @@ const Index = (props) => {
       {ReactDOM.createPortal(
         (<div className={classesName}>
           <header className={classes.header} onClick={handleClick}>
-            <h2>GIỎ HÀNG (5)</h2>
+            <h2>GIỎ HÀNG</h2>
             <button onClick={props.onClose}>Đóng</button>
           </header>
           <div className={classes["body-wrapper"]}>
             <SideCartList cartItems={items} />
             {items.length > 0 && (
               <div className={classes.footer}>
-                <div className={classes.total}>
+                {/* <div className={classes.total}>
                   <div>TỔNG GIÁ:</div>
                   <div>{totalPrice} Đ</div>
-                </div>
+                </div> */}
                 <div className={classes["button-group"]}>
                   <NavLink to="/check-out">
                     <Button>Thanh toán</Button>
                   </NavLink>
-                  <NavLink to="/cart">
+                  <NavLink to="/check-out">
                     <BorderedButton>Chi tiết</BorderedButton>
                   </NavLink>
                 </div>

@@ -130,14 +130,6 @@ const MainNavigation = () => {
                   Đơn Hàng
                 </NavLink>
               </li>
-              <li className={classes["menu-item"]}>
-                <NavLink
-                  to="/contact"
-                  className={(props) => (props.isActive ? classes.active : "")}
-                >
-                  Liên lạc
-                </NavLink>
-              </li>
             </ul>
           </nav>
           <div className={classes["fn-wrapper"]}>
@@ -161,7 +153,7 @@ const MainNavigation = () => {
                   props.isActive ? classes["btn-active"] : ""
                 }
               >
-                <MenuButton icon={<FavoriteIcon />} quantity={10} />
+                <MenuButton icon={<FavoriteIcon />}  />
               </NavLink>
               <MenuButton
                 icon={<ShoppingBasketIcon />}
