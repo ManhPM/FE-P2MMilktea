@@ -159,7 +159,7 @@ const OrderDetail = () => {
                                     <p> {infoOder.description} </p>
                                 </div>
                                 <div className={classes["info__user-pay"]}>
-                                    <h1>Tổng tiền hoá đơn :</h1>
+                                    <h1>Tiền hoá đơn :</h1>
                                     <p>{infoOder.item_fee} </p>
                                 </div>
                                 <div className={classes["info__user-deliveryfee"]}>

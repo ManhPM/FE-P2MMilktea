@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react'
 import ReactMapGL, {Marker,Popup} from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
 import axios from '../../apiRequest/axios';
+import mapimage from '../../assets/images/map_icon.png'
 import classes from './Mapbox.module.css'
 mapboxgl.accessToken = 'pk.eyJ1IjoiZHVjaGF1MDUyMSIsImEiOiJjbGlqN3l3bzgwNHZkM2txbzhiemdnZDlhIn0.L20rg56BLB6iTrMutkntMw';
 
@@ -59,7 +60,7 @@ const Mapbox  = () => {
                     <img
                         onClick={() => setShowPopup(true)}
                         style={{height:50,width:50}}
-                        src="../../image/marker-icon.png"
+                        src={mapimage}
                     />
                 </Marker>
 

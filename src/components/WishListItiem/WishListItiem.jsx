@@ -7,65 +7,9 @@ import {Link} from 'react-router-dom'
 import { useState,useEffect } from 'react';
 import api from '../../apiRequest/axios'
 //import "bootstrap/dist/css/bootstrap.min.css";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
-
-
-const Listitiem = [
-    {
-        id: "f007",
-        name: "Iced Tea",
-        ingredients: "Nguyên liệu sản phẩm",
-        price: 30000,
-        image:
-          "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/13-1-600x600.png",
-        date: "2020-08-13"
-      },
-      {
-        id: "f008",
-        name: "Burger",
-        ingredients: "Nguyên liệu sản phẩm",
-        price: 30000,
-        image:
-          "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/13-1-600x600.png",
-        date: "2020-08-13"
-      },
-      {
-        id: "f009",
-        name: "Burger",
-        ingredients: "Nguyên liệu sản phẩm",
-        price: 30000,
-        image:
-          "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/13-1-600x600.png",
-        date: "2020-08-13"
-      },
-      {
-        id: "f0010",
-        name: "Nước ép dâu",
-        ingredients: "Nguyên liệu sản phẩm",
-        price: 30000,
-        image:
-          "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/5-1-600x600.png",
-        date: "2020-08-13"
-      },
-      {
-        id: "f0011",
-        name: "Nước ép dâu",
-        ingredients: "Nguyên liệu sản phẩm",
-        price: 30000,
-        image:
-          "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/5-1-600x600.png",
-        date: "2020-08-13"
-      },
-      {
-        id: "f0012",
-        name: "Nước ép dâu",
-        ingredients: "Nguyên liệu sản phẩm",
-        price: 30000,
-        image:
-          "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/5-1-600x600.png",
-        date: "2020-08-13"
-      },
-]
 
 
 const WishListItiem = () => {
@@ -100,10 +44,30 @@ const WishListItiem = () => {
         }
     })
     .then(function (res) {
-        console.log(res) 
+        console.log(res)
+        toast.success('Thêm vào giỏ hàng thành công', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+      }); 
     })
     .catch(function (res) {
         console.log(res)
+        toast.warn('Thao tác thất bại', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+      });
     });
   }
 
@@ -140,6 +104,18 @@ const WishListItiem = () => {
                     </tbody>
                 </Table>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </div>
     )
 };

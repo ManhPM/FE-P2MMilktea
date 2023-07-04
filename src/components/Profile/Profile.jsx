@@ -100,7 +100,7 @@ const Profile = () => {
         }));
     }
     return(
-        <div style={{marginTop:"100px"}} className={classes["main-container"]}>
+        <div style={{marginTop:"80px"}} className={classes["main-container"]}>
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-6">
@@ -161,46 +161,27 @@ const Profile = () => {
                                 <div className={classes["button-update"]} onClick={handleSubmit}>
                                     <button>Cập nhập thông tin</button>
                                 </div>
+                                <Link to="/change-password">
+                                <div className={classes["log-out"]}>
+                                    <button>Đổi Mật Khẩu</button>
+                                </div>
+                                </Link>
                             </div>
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
-                        <div className={classes["info-pay"]}>
-                            <div className={classes["main-title"]}>
-                                <h5>Tổng     giao dịch</h5>
+                        <div className={classes["total-order"]}>
+                            <p>Tổng hoá đơn: 9</p>
+                        </div>
+                        <div className={classes["total-pay"]}>
+                            <p>Tổng tiền thanh toán: 20.000.000</p>
+                        </div>
+                        <div className={classes["order-type"]}>
+                            <div className={classes["order-final"]}>
+                                <p>Hoá đơn thành công: 5</p>
                             </div>
-                            <div className={classes["pay-user"]}>
-                                <div className={classes["title-pay"]}>
-                                    <h6>Tổng đơn hàng </h6>
-                                </div>
-                                <div className={classes["pay-info"]}>
-                                    <h5>15 đơn hàng</h5>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className={classes["pay-user"]}>
-                                <div className={classes["title-pay"]}>
-                                    <h6>Đơn hàng thành công</h6>
-                                </div>
-                                <div className={classes["pay-info"]}>
-                                    <h5>11</h5>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className={classes["pay-user"]}>
-                                <div className={classes["title-pay"]}>
-                                    <h6>Đơn hàng thất bại</h6>
-                                </div>
-                                <div className={classes["pay-info"]}>
-                                    <h5>4</h5>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className={classes["total-pay"]}>
-                                <div className={classes["title-pay"]}>
-                                    <h5>Tổng giá trị giao dịch : </h5>
-                                    <h6>500.000 vnd</h6>
-                                </div>  
+                            <div className={classes["order-cancel"]}>
+                                <p>Hoá đơn đã huỷ: 4</p>
                             </div>
                         </div>
                     </div>

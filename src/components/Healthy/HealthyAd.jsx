@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import classes from "./HeadthyAd.module.css";
 
 //images
-import vegetable from "../../assets/images/backgrounds/h_vegetable.png";
+import vegetable from "../../assets/images/slider/slider_bg_3.jpg";
 import icon1 from "../../assets/icons/healthy_1.png";
 import icon2 from "../../assets/icons/healthy_2.png";
 import greenChilli from "../../assets/images/parallax_decors/h_healthy_green_chilli.png";
@@ -39,8 +39,8 @@ const HealthyAd = () => {
                   <img src={icon1} alt="icon1" />
                 </div>
                 <div className={classes["ad-item_desc"]}>
-                  <h5>Chọn rau vào khẩu phần</h5>
-                  <p>Order thêm rau củ vào món ăn</p>
+                  <h5>Menu đa dạng</h5>
+                  <p>Tha hồ cho bạn lựa chọn</p>
                 </div>
               </li>
               <li className={classes["ad-item"]}>
@@ -48,12 +48,12 @@ const HealthyAd = () => {
                   <img src={icon2} alt="icon2" />
                 </div>
                 <div className={classes["ad-item_desc"]}>
-                  <h5>Rau tươi sạch</h5>
-                  <p>Được trồng và chế biến tươi sạch</p>
+                  <h5>Sản phẩm chất lượng</h5>
+                  <p>Được chế biến theo nguyên liệu tự nhiên</p>
                 </div>
               </li>
             </ul>
-            <Link to="/shop" className={classes["shop-btn"]}>
+            <Link to="/menu" className={classes["shop-btn"]}>
               <Button>Ghé menu</Button>
             </Link>
           </Col>

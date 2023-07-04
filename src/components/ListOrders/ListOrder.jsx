@@ -39,13 +39,13 @@ const ListOders = () => {
                 <p className={classes['text-wait']} >Chưa xác nhận </p>   
             )
         }
-        if(order==1){
+        if(order==2){
             return ( 
-                <p className={classes['text-confirm']} >Đã xác nhận </p>
+                <p className={classes['text-cancel']} >Đã Huỷ </p>
         )}
         else{
             return (
-                <p className={classes['text-cancel']} >Đã Huỷ </p>
+                <p className={classes['text-confirm']} >Đã xác nhận </p>
         )}
     }
     return (

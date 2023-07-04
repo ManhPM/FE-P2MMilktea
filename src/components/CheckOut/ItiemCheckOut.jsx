@@ -53,10 +53,53 @@ const ItiemCheckOut = () => {
         })
         return res
     }
-    // console.log(pays,description,selectedShipper,latitude,longitude,code)
+    console.log(pays,description,selectedShipper,latitude,longitude,code)
     const CheckOut = () => {
-        try{
-            {
+        if(items.length===0){
+            return(
+                toast.error('Giỏ hàng không có sản phẩm', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                }
+            ))
+        }
+        if(pays===''){
+            return(
+                toast.error('Vui lòng chọn phương thức thanh toán', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                }
+            ))
+        }
+        if(selectedShipper===''){
+            return(
+                toast.error('Vui lòng chọn phương thức thanh toán', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                }
+            ))
+        }
+        else{
+            try{
+                {
                 api.post('/cart/checkout', {
                     id_payment: pays,
                     description: description,
@@ -99,12 +142,13 @@ const ItiemCheckOut = () => {
                         draggable: true,
                         progress: undefined,
                         theme: "colored",
-                        });
+                    });
                 })
             }
             
-        }catch(error){
+            }catch(error){
             console.log(error.response.data);
+            }
         }
     }
 

@@ -15,6 +15,8 @@ import RawMaterialFood from './RawMaterialFood';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import api from '../../apiRequest/axios'
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -49,10 +51,30 @@ const ProductDetail = () => {
             }
         })
         .then(function (res) {
-            console.log(res) 
+            console.log(res)
+            toast.success('Thêm vào giỏ hàng thành công', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            }); 
         })
         .catch(function (res) {
             console.log(res)
+            toast.warn('Thao tác thất bại', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         });
     }
     const handleWishList = async (id_item) => {
@@ -63,7 +85,17 @@ const ProductDetail = () => {
             }
         })
         .then(function (res) {
-            console.log(res) 
+            console.log(res)
+            toast.success('Đã thêm vào danh sách yêu thích', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            }); 
         })
         .catch(function (res) {
             console.log(res)
@@ -154,6 +186,18 @@ const ProductDetail = () => {
               
             </div>
             <Footer/>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             
         </section>
     );
