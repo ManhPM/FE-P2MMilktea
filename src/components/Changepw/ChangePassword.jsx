@@ -12,6 +12,7 @@ const ChangePassword = () => {
     const [password, setPassword] = useState("");
     const [newpassword, setNewPassword] = useState("");
     const [resetPassword,setResetPassword] = useState("");
+    const [error,setError] = useState("")
     const navigate = useNavigate()
 
     const handleNewPasswordChange = (event) => {
@@ -57,8 +58,12 @@ const ChangePassword = () => {
                     }, 2000);
                 })
                 .catch(err =>{
-                    console.log(err)
-                    toast.error('Thao tác thất bại', {
+                    console.log(err);
+                    setError(err.response.data.message)
+                    console.log(error)
+                    if(error===""){
+                        return(
+                        toast.error('Thao tác thất bại', {
                         position: "top-right",
                         autoClose: 2000,
                         hideProgressBar: true,
@@ -67,7 +72,22 @@ const ChangePassword = () => {
                         draggable: true,
                         progress: undefined,
                         theme: "colored",
-                        });
+                        }));
+                    }
+                    else{
+                        return(
+                            toast.error(<div>{error}</div>, {
+                                position: "top-right",
+                                autoClose: 2000,
+                                hideProgressBar: true,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "colored",
+                                })
+                            )
+                    }   
                 })
                 
             }
@@ -75,7 +95,7 @@ const ChangePassword = () => {
                 console.log(error);
             }    
     };
-    console.log(password)
+    // console.log(password)
 
     return(
         <div className="container">
