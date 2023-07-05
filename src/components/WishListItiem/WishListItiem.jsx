@@ -9,14 +9,15 @@ import api from '../../apiRequest/axios'
 //import "bootstrap/dist/css/bootstrap.min.css";
 import {ToastContainer, toast} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from "react-router-dom";
 
 
 const WishListItiem = () => {
     const token = localStorage.getItem('token')
     const quantity = {quantity: 1}
     const [wishLists,setWishLists] = useState([])
-
+    const [value, setValue] = useState(1);
+    const navigate = useNavigate();
   const getData = async() => {
     const res = await api.get("/wishlist",{
       headers:{
@@ -25,16 +26,7 @@ const WishListItiem = () => {
     })
     return res
   }
-  useEffect(() => {
-    
-      getData().then((res) => {
-        setWishLists(res.data)
-        
-      })
-      getData().catch((err) => {
-        console.log(err)
-      })
-  },[])
+  
   console.log(wishLists.length)
   const handleAddToCart = async (id_item) => {
     api.post(`cart/add/${id_item}`,quantity,
@@ -45,6 +37,7 @@ const WishListItiem = () => {
     })
     .then(function (res) {
         console.log(res)
+        setValue(value + 1)
         toast.success('Thêm vào giỏ hàng thành công', {
           position: "top-right",
           autoClose: 2000,
@@ -70,8 +63,52 @@ const WishListItiem = () => {
       });
     });
   }
+  const handleWishList = async (id_item) => {
+    api.post(`wishlist/${id_item}`,{},
+    {
+        headers: {
+            access_token: token
+        }
+    })
+    .then(function (res) {
+        console.log(res)
+        setValue(value + 1)
+        toast.success('Đã xoá khỏi danh sách yêu thích', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        }); 
+    })
+    .catch(function (res) {
+        console.log(res)
+        toast.warn('Thao tác thất bại', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+    });
+    }
 
-
+    useEffect(() => {
+    
+        getData().then((res) => {
+          setWishLists(res.data)
+          
+        })
+        getData().catch((err) => {
+          console.log(err)
+        })
+    },[value])
     return(
         <div>
             <div className={classes['main-content']}>
@@ -89,14 +126,15 @@ const WishListItiem = () => {
                         {wishLists.map((wishList =>{
                             return (
                                 <tr key={wishList.id_item}>
-                                    <td className={classes['column-image']}><Link to="/"><img src={wishList.image} alt="food image" width="90px" height="90px"></img></Link></td>
+                                    <td className={classes['column-image']}><Link to="product-detail/${wishList}" ><img src={wishList.image} alt="food image" width="90px" height="90px"></img></Link></td>
                                     <td className={classes['column-des']}>
-                                        <div><Link className={classes['name-itiem']} to="/">{wishList.name}</Link></div>
+                                        <div><p className={classes['name-itiem']} onClick={() => navigate(`/product-detail/${wishList.id_item}`)} >{wishList.name}</p></div>
                                         <div>Giá: {wishList.price}</div>
                                         <div>20-11-2021</div>
                                     </td>
                                     <td className='align-middle'>
                                         <AddButton onClick={() => handleAddToCart(wishList.id_item)}>Add To Card</AddButton>
+                                        <AddButton onClick={() => handleWishList(wishList.id_item)}>Xoá khỏi danh sách</AddButton>
                                     </td>
                                 </tr>
                             )

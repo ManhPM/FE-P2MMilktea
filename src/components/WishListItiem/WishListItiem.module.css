@@ -25,6 +25,7 @@
 .name-itiem{
     color:var(--primary);
     font-size: 1.2rem;
+    cursor: pointer;
 }
 .name-itiem:hover{
     color: var(--primary-dark);

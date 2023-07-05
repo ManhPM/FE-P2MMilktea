@@ -46,7 +46,7 @@ const OrderDetail = () => {
             })
             toast.success('Đã Huỷ Đơn Hàng', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -178,7 +178,7 @@ const OrderDetail = () => {
                         </div>
                         <ToastContainer
                             position="top-right"
-                            autoClose={5000}
+                            autoClose={2000}
                             hideProgressBar
                             newestOnTop={false}
                             closeOnClick

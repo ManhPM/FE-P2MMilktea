@@ -16,6 +16,7 @@ const Index = (props) => {
   const token = localStorage.getItem('token')
   const [items,setItems] = useState([])
   const [click,setClick] = useState(1)
+  const { itemList } = props;
 
 
   const getData = async() => {
@@ -35,8 +36,9 @@ const Index = (props) => {
       console.log(err)
     })
   },[click])
-  // console.log(items)
+  console.log(itemList)
   //check chỉ gọi lại api khi tắt cart
+  // console.log(items)
   const handleClick = (e) => {
     setClick(click + 1)
   }
@@ -49,7 +51,7 @@ const Index = (props) => {
             <button onClick={props.onClose}>Đóng</button>
           </header>
           <div className={classes["body-wrapper"]}>
-            <SideCartList cartItems={items} />
+            <SideCartList cartItems={itemList} />
             {items.length > 0 && (
               <div className={classes.footer}>
                 {/* <div className={classes.total}>
@@ -57,9 +59,9 @@ const Index = (props) => {
                   <div>{totalPrice} Đ</div>
                 </div> */}
                 <div className={classes["button-group"]}>
-                  <NavLink to="/check-out">
+                  {/* <NavLink to="/check-out">
                     <Button>Thanh toán</Button>
-                  </NavLink>
+                  </NavLink> */}
                   <NavLink to="/check-out">
                     <BorderedButton>Chi tiết</BorderedButton>
                   </NavLink>

@@ -54,7 +54,7 @@ const ProductDetail = () => {
             console.log(res)
             toast.success('Thêm vào giỏ hàng thành công', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1500,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -88,7 +88,7 @@ const ProductDetail = () => {
             console.log(res)
             toast.success('Đã thêm vào danh sách yêu thích', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1500,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -188,7 +188,7 @@ const ProductDetail = () => {
             <Footer/>
             <ToastContainer
                 position="top-right"
-                autoClose={2000}
+                autoClose={1500}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

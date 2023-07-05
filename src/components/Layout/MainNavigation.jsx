@@ -17,13 +17,37 @@ import Backdrop from "../UI/Modal/Backdrop";
 import Authentication from "../UI/Modal/Auth/Authentication";
 import SideCart from "../UI/Modal/SideCart";
 import MobileMenu from "./MobileMenu";
+import api from "../../apiRequest/axios"
 
 const MainNavigation = () => {
+  const token = localStorage.getItem('token')
   const navigate = useNavigate()
   const [authenticationIsOpen, setAuthenticationIsOpen] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
+  const [listitems,setListitems] = useState([])
+  const [click,setClick] = useState(1)
 
+
+
+  const getData = async() => {
+    const res = await api.get("/cart",{
+        headers: {
+            access_token: token
+        }
+    })
+    return res
+  }
+  useEffect(() => {
+  
+    getData().then((res) => {
+      setListitems(res.data.itemList)
+    })
+    getData().catch((err) => {
+      console.log(err)
+    })
+  },[click])
+  console.log(listitems)
   // modal actions
   //Auth
   const openAuthHandler = () => {
@@ -89,6 +113,7 @@ const MainNavigation = () => {
       <SideCart
         className={cartIsOpen ? "open" : ""}
         onClose={closeCartHandler}
+        itemList = {listitems}
       />
 
       <Container className={classes["main-menu"]}>
@@ -119,7 +144,7 @@ const MainNavigation = () => {
                   to="/check-out"
                   className={(props) => (props.isActive ? classes.active : "")}
                 >
-                  Thanh toán
+                  Giỏ Hàng
                 </NavLink>
               </li>
               <li className={classes["menu-item"]}>
@@ -155,11 +180,11 @@ const MainNavigation = () => {
               >
                 <MenuButton icon={<FavoriteIcon />}  />
               </NavLink>
-              <MenuButton
+              {/* <MenuButton
                 icon={<ShoppingBasketIcon />}
                 quantity=""
                 onClick={openCartHandler}
-              />
+              /> */}
             </div>
           </div>
           {/* Mobile Menu */}

@@ -43,7 +43,7 @@ const Mapbox  = () => {
     // console.log(latitude)
     // console.log(longitude)
     return(
-        <div style={{width:"63vw", height:"60vh"}}>
+        <div style={{width:"63vw", height:"60vh",}}>
             <ReactMapGL
                 {...viewport}
                 mapStyle="mapbox://styles/mapbox/streets-v11"

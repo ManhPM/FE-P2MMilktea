@@ -26,7 +26,7 @@ const SideCartItem = (props) => {
   // console.log(item.id_item)
   return (
     <li className={classes.item}>
-      <NavLink to="/check-out" className={classes["remove-btn"]}
+      <NavLink  className={classes["remove-btn"]}
         onClick={() => handleDelteitem(item.id_item)}
       >
         <HighlightOffIcon />

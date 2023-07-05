@@ -68,84 +68,10 @@ const ItiemCheckOut = () => {
                     theme: "colored",
                 }
             ))
-        }
-        if(pays===''){
-            return(
-                toast.error('Vui lòng chọn phương thức thanh toán', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                }
-            ))
-        }
-        if(selectedShipper===''){
-            return(
-                toast.error('Vui lòng chọn phương thức thanh toán', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                }
-            ))
-        }
+        }  
         else{
             try{
-                {
-                api.post('/cart/checkout', {
-                    id_payment: pays,
-                    description: description,
-                    id_shipping_partner: selectedShipper,
-                    userLat: latitude,
-                    userLng:longitude,
-                    code: code
-                },
-                    {
-                        headers: {
-                            access_token: token,
-                        }
-                    }
-                )
-                .then(res =>{
-                    
-                    navigate('/check-out')
-                    console.log(res)
-                    setValue(value + 1)
-                    toast.success('Đặt Hàng Thành Công', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    });
-                })
-                .catch(err =>{
-                    
-                    console.log(err)
-                    toast.error('Thao tác thất bại', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                    });
-                })
-            }
-            
+                navigate("/payment")
             }catch(error){
             console.log(error.response.data);
             }
@@ -337,7 +263,7 @@ const ItiemCheckOut = () => {
             <div className={classes["handle__error"]}>
                 <p>{error}</p>
             </div>
-            <div className={classes["payment__map"]}>
+            {/* <div className={classes["payment__map"]}>
             <div className={classes["payment__method"]}>
             <p>Chọn Phương thức thanh toán:</p>
             <select name="lang" id="lang-select" multiple onChange={handleChangePay} className={classes["set__payment"]}>
@@ -363,7 +289,7 @@ const ItiemCheckOut = () => {
             <div className={classes["box__map"]}>
                 <Mapbox/>
             </div>
-            </div>
+            </div> */}
             <div className={classes["Check__out"]}>
                 <button
                     onClick={CheckOut}

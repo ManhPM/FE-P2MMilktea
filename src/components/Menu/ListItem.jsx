@@ -80,7 +80,7 @@ const ListItem = () =>{
             console.log(res)
             toast.success('Thêm hàng thành công', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 1500,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -93,7 +93,7 @@ const ListItem = () =>{
             console.log(res)
             toast.error('Thêm hàng thất bại', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 1500,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -168,7 +168,7 @@ const ListItem = () =>{
                     </div>
                     <ToastContainer 
                         position="top-right"
-                        autoClose={5000}
+                        autoClose={1500}
                         hideProgressBar
                         newestOnTop={false}
                         closeOnClick
