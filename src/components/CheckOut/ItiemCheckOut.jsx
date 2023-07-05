@@ -135,7 +135,12 @@ const ItiemCheckOut = () => {
                 progress: undefined,
                 theme: "light",
             });
-            setValue(value + 1) 
+            getData().then((res) => {
+                setItems(res.data.itemList)
+            })
+            getData().catch((err) => {
+                console.log(err)
+            })
         })
         .catch(function (res) {
             console.log(res)
@@ -172,7 +177,12 @@ const ItiemCheckOut = () => {
                 progress: undefined,
                 theme: "light",
             }); 
-            setValue(value - 1)
+            getData().then((res) => {
+                setItems(res.data.itemList)
+            })
+            getData().catch((err) => {
+                console.log(err)
+            })
         })
         .catch(function (res) {
             console.log(res)
@@ -190,6 +200,7 @@ const ItiemCheckOut = () => {
         setValue(value - 1)
     }
     const handleDelteitem = async (id_item) => {
+        setValue(value + 1)
         api.delete(`cart/remove/${id_item}`,
         {
             headers: {
@@ -201,7 +212,7 @@ const ItiemCheckOut = () => {
             setValue(value + 1)
             toast.success('Đã xoá khỏi giỏ hàng', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -209,12 +220,18 @@ const ItiemCheckOut = () => {
                 progress: undefined,
                 theme: "light",
             }); 
+            getData().then((res) => {
+                setItems(res.data.itemList)
+            })
+            getData().catch((err) => {
+                console.log(err)
+            })
         })
         .catch(function (res) {
             console.log(res)
             toast.warn('Thao tác thất bại', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -223,7 +240,6 @@ const ItiemCheckOut = () => {
                 theme: "light",
             });
         });
-        setValue(value + 1)
     }
     
     return (
@@ -239,7 +255,7 @@ const ItiemCheckOut = () => {
                     <img src={item.image} alt="food image" width="90px" height="90px"></img>
                 </div>
                 <div className={classes["name-item"]}>
-                    <p>{item.name}</p>
+                    <p onClick={() => navigate(`/product-detail/${item.id_item}`)}>{item.name}</p>
                 </div>
                 <div className={classes["price"]}>
                     <p>Đơn Giá : {item.price}</p>

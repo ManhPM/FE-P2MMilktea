@@ -170,7 +170,7 @@ const MainNavigation = () => {
               </h3>
             </div> */}
             <div className={`d-flex align-items-center ${classes["mn-btn"]}`}>
-              <MenuButton icon={<SearchTwoToneIcon />} />
+              {/* <MenuButton icon={<SearchTwoToneIcon />} /> */}
               <MenuButton icon={<PersonIcon />} onClick={handleClickLoginSucces} />
               <NavLink
                 to="/wish-list"

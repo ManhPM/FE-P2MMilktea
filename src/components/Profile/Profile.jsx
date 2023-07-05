@@ -69,7 +69,7 @@ const Profile = () => {
                     theme: "colored",
                     });
                 setTimeout(() => {
-                    navigate('/')
+                    navigate('/profile')
                 }, 2000);
             })
             .catch(err =>{

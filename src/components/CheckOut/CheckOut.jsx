@@ -9,8 +9,8 @@ const CheckOut = () => {
         <div>
             <div className={classes['main-content']}>
                 <div style={{margin:'auto'}}>
-                <h1 className='display-5  text-center align-baseline'>Thanh Toán</h1>
-                <p className="text-center "><Link to='/' style={{color:'var(--grey-dark)'}}>Home</Link><ChevronRightIcon/>Thanh Toán</p>
+                <h1 className='display-5  text-center align-baseline'>Giỏ Hàng</h1>
+                <p className="text-center "><Link to='/' style={{color:'var(--grey-dark)'}}>Home</Link><ChevronRightIcon/>Giỏ Hàng</p>
                 </div>
             </div>
             <ItiemCheckOut/>
