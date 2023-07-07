@@ -158,7 +158,9 @@
     margin-top: 20px;
     margin-bottom: 30px;
 }
-
+.payment__method > textarea:focus{
+    border-color: var(--primary);
+}
 .map__box{
     margin-left: 50px;
     display: block;
@@ -179,4 +181,14 @@
 }
 .Check__out{
     margin-top: 100px;
+}
+
+.discount{
+    width:300px;
+    font-weight: 600;
+    font-size: 20px;
+    color:#000;
+}
+.discount > label {
+    font-weight: 600;
 }

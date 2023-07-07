@@ -6,7 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Mapbox from "../Mapbox/Mapbox";
 
 import api from '../../apiRequest/axios';
-import classes from './PaymentDetail.module.css'
+import classes from './PaymentDetail.module.css';
+import LabledInput from "../UI/Input/LabledInput";
 
 const PaymentDetail = () => {
     const token = localStorage.getItem('token')
@@ -17,11 +18,13 @@ const PaymentDetail = () => {
     const [value, setValue] = useState(1);
     const [paysmethod, setPaysmethod] = useState([]);
     const [pays,setPays] = useState('');
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);
+    const [discount,setDiscount] = useState("");
     const [description,setDescription] = useState('Ghi Chu')
     const [shippings,setShippings] = useState([])
     const [code,setCode] = useState('')
     const [selectedShipper, setSelectedShipper] = useState('')
+    const [error,setError] = useState("")
     const payments = [...paysmethod]
 
     const getData = async() => {
@@ -80,6 +83,9 @@ const PaymentDetail = () => {
     const handleChangeShipper = (e) => {
         setSelectedShipper(e.target.value)
     }
+    const handleChangeDiscount = (e) => {
+        setDiscount(e.target.value)
+    }
 
     const CheckOut = () => {
         if(items.length===0){
@@ -133,7 +139,7 @@ const PaymentDetail = () => {
                     id_shipping_partner: selectedShipper,
                     userLat: latitude,
                     userLng:longitude,
-                    code: code
+                    code: discount
                 },
                     {
                         headers: {
@@ -160,9 +166,9 @@ const PaymentDetail = () => {
                     }, 2000);
                 })
                 .catch(err =>{
-                    
                     console.log(err)
-                    toast.error('Thao tác thất bại', {
+                    setError(err.response.data)
+                    toast.error(<div>{error}</div>, {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: true,
@@ -181,8 +187,8 @@ const PaymentDetail = () => {
         }
     }
 
-    console.log(pays,description,selectedShipper,latitude,longitude,code)
-    console.log(token)
+    console.log(pays,description,selectedShipper,latitude,longitude,discount)
+    console.log(discount)
 
     return(
         <div className={classes.container}>
@@ -214,6 +220,9 @@ const PaymentDetail = () => {
                         )})}
                         {/* <div>Tổng Giá</div>
                         <hr></hr> */}
+                        <div className={classes["map__box"]}>
+                            <Mapbox/>
+                        </div>
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
@@ -238,6 +247,14 @@ const PaymentDetail = () => {
                                 </option>
                             )})}   
                             </select>
+                            <div className={classes["discount"]}>
+                                <LabledInput
+                                    label="Nhập mã giảm giá"
+                                    name="sale"
+                                    placeholder="Nhập mã giảm giá"
+                                    onChange={handleChangeDiscount}
+                                />
+                            </div>
                         </div>
                         
                     </div>
@@ -254,9 +271,9 @@ const PaymentDetail = () => {
                             theme="colored"
                 />
             </div>
-            <div className={classes["map__box"]}>
+            {/* <div className={classes["map__box"]}>
                     <Mapbox/>
-            </div>
+            </div> */}
             <div className={classes["Check__out"]}>
                 <button
                     onClick={CheckOut}

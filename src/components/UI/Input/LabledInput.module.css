@@ -6,7 +6,7 @@
 }
 
 .control-label {
-  color: var(--grey);
+  color: var(--text);
 }
 
 .control-input {

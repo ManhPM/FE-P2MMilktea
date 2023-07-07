@@ -155,6 +155,14 @@ const MainNavigation = () => {
                   Đơn Hàng
                 </NavLink>
               </li>
+              <li className={classes["menu-item"]}>
+                <NavLink
+                  to="/discount"
+                  className={(props) => (props.isActive ? classes.active : "")}
+                >
+                  Khuyến mãi
+                </NavLink>
+              </li>
             </ul>
           </nav>
           <div className={classes["fn-wrapper"]}>
