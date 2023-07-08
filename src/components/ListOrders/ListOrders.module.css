@@ -83,6 +83,11 @@
     color: var(--primary);
     font-weight: 600;
 }
+.text-unconfirm{
+    font-size:18px;
+    color: var(--info);
+    font-weight: 600;
+}
 
 .status-wait{
     display: block;

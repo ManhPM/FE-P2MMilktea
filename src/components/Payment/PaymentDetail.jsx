@@ -167,8 +167,8 @@ const PaymentDetail = () => {
                 })
                 .catch(err =>{
                     console.log(err)
-                    setError(err.response.data)
-                    toast.error(<div>{error}</div>, {
+                    setError(err.response.data.message)
+                    toast.error(<div>{err.response.data.message}</div>, {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: true,

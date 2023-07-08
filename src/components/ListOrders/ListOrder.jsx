@@ -36,7 +36,17 @@ const ListOders = () => {
         //console.log(order)
         if(order==0){
             return(    
-                <p className={classes['text-wait']} >Chưa xác nhận </p>   
+                <p className={classes['text-wait']} >Chưa xác nhận</p>   
+            )
+        }
+        if(order==3){
+            return(    
+                <p className={classes['text-unconfirm']} >Đang giao</p>   
+            )
+        }
+        if(order==4){
+            return(    
+                <p className={classes['text-confirm']} >Hoàn thành</p>   
             )
         }
         if(order==2){
@@ -45,7 +55,7 @@ const ListOders = () => {
         )}
         else{
             return (
-                <p className={classes['text-confirm']} >Đã xác nhận </p>
+                <p className={classes['text-unconfirm']} >Đã xác nhận </p>
         )}
     }
     return (
