@@ -1,5 +1,5 @@
-import {useState,useEffect} from 'react'
-import ReactMapGL, {Marker,Popup} from 'react-map-gl';
+import {useState} from 'react'
+import ReactMapGL, {Marker} from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
 import axios from '../../apiRequest/axios';
 import mapimage from '../../assets/images/location.png'
@@ -16,7 +16,7 @@ const Mapbox  = () => {
         latitude : latitude,
         longitude : longitude
     });
-    const [showPopup,setShowPopup] = useState(false)
+    const [setShowPopup] = useState(false)
     const [address,setAddress] = useState("")
 
 
@@ -56,6 +56,7 @@ const Mapbox  = () => {
                     offsetTop={-30}
                 >
                     <img
+                        alt=''
                         onClick={() => setShowPopup(true)}
                         style={{height:50,width:50}}
                         src={mapimage}
