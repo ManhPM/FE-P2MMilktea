@@ -9,8 +9,8 @@ const MenuItem = () =>{
         <div>
             <div className={classes['main-content']}>
                 <div style={{margin:'auto'}}>
-                <h1 className='display-5  text-center align-baseline'>Thực Đơn</h1>
-                <p className="text-center "><Link to='/' style={{color:'var(--grey-dark)'}}>Home</Link><ChevronRightIcon/>Thực đơn</p>
+                <h1 className='display-5  text-center align-baseline'>Sản phẩm</h1>
+                <p className="text-center "><Link to='/' style={{color:'var(--grey-dark)'}}>Home</Link><ChevronRightIcon/>Sản phẩm</p>
                 </div>
                 
             </div>

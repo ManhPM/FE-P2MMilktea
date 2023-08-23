@@ -136,7 +136,7 @@ const MainNavigation = () => {
                   to="/menu"
                   className={(props) => (props.isActive ? classes.active : "")}
                 >
-                  Thực đơn
+                  Sản phẩm
                 </NavLink>
               </li>
               <li className={classes["menu-item"]}>
@@ -163,20 +163,14 @@ const MainNavigation = () => {
                   Khuyến mãi
                 </NavLink>
               </li>
+              <li className={classes["menu-item"]}>
+              <a href="https://p2mmilktea.onrender.com/vnpay/create_payment_url" target="_blank" rel="noreferrer">
+              Thanh toán
+              </a>{" "}
+              </li>
             </ul>
           </nav>
           <div className={classes["fn-wrapper"]}>
-            {/* <div className={classes["ship-icon"]}>
-              <img src={scooterIcon} alt="shipping-icon" />
-            </div>
-            <div className={classes["ship-desc"]}>
-              <h4>
-                <span className={classes.header}>Đặt hàng ngay tại: </span>
-              </h4>
-              <h3>
-                <span className={classes.phone}>+ 1 123 456 789</span>
-              </h3>
-            </div> */}
             <div className={`d-flex align-items-center ${classes["mn-btn"]}`}>
               {/* <MenuButton icon={<SearchTwoToneIcon />} /> */}
               <MenuButton icon={<PersonIcon />} onClick={handleClickLoginSucces} />
@@ -188,11 +182,6 @@ const MainNavigation = () => {
               >
                 <MenuButton icon={<FavoriteIcon />}  />
               </NavLink>
-              {/* <MenuButton
-                icon={<ShoppingBasketIcon />}
-                quantity=""
-                onClick={openCartHandler}
-              /> */}
             </div>
           </div>
           {/* Mobile Menu */}

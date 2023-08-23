@@ -2,7 +2,7 @@ import {useState,useEffect} from 'react'
 import ReactMapGL, {Marker,Popup} from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
 import axios from '../../apiRequest/axios';
-import mapimage from '../../assets/images/map_icon.png'
+import mapimage from '../../assets/images/location.png'
 import classes from './Mapbox.module.css'
 mapboxgl.accessToken = 'pk.eyJ1IjoiZHVjaGF1MDUyMSIsImEiOiJjbGlqN3l3bzgwNHZkM2txbzhiemdnZDlhIn0.L20rg56BLB6iTrMutkntMw';
 
@@ -40,8 +40,6 @@ const Mapbox  = () => {
         localStorage.setItem("latitude",latitude);
         localStorage.setItem("longitude",longitude);
     }
-    // console.log(latitude)
-    // console.log(longitude)
     return(
         <div style={{width:"63vw", height:"60vh",}}>
             <ReactMapGL

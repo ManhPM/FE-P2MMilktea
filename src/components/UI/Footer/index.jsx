@@ -90,7 +90,7 @@ const Footer = () => {
       <div className={classes["introduce-item"]}>
         <div className={classes["introduce-item_1"]}>
           <p>
-            Copyright © 2022 <Link to="" className={classes["linker-home"]}>Pocofood.</Link> All Rights Reserved.
+            Copyright © 2023 <Link to="" className={classes["linker-home"]}>P2M Milktea.</Link> All Rights Reserved.
           </p>
         </div>
         <div className={classes["introduce-item_2"]}>

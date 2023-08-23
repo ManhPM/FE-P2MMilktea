@@ -81,7 +81,7 @@ const ListOders = () => {
                     <p>Phí ship : {order.delivery_fee}</p>
                 </div>
                 <div className={classes["total-price"]}>
-                    <p>Tổng Giá : {order.total}</p>
+                    <p>Tổng : {order.total}</p>
                 </div>
                 <div className={classes["total-price"]}>
                     <Status value={order.status}/>

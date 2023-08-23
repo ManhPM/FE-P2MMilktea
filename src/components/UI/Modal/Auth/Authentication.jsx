@@ -116,6 +116,14 @@ const LoginForm = (props) => {
           </Button>
         </NavLink>
       </div>
+      <div className={classes.switch}>
+        <p>Quên mật khẩu ? Lấy lại mật khẩu tại đây</p>
+        <NavLink to="/forgotpassword" onClick={props.onClose}>
+          <Button>
+            <KeyboardDoubleArrowRightIcon />
+          </Button>
+        </NavLink>
+      </div>
       <Button type="submit">Đăng Nhập</Button>
     </form>
   );

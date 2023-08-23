@@ -12,6 +12,7 @@ import WishButton from '../UI/Button/WishButton';
 import { useState,useEffect } from 'react';
 import Footer from '../UI/Footer';
 import RawMaterialFood from './RawMaterialFood';
+import Review from './Review';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import api from '../../apiRequest/axios'
@@ -31,7 +32,7 @@ const ProductDetail = () => {
     useEffect(() => {
         
         async function getData(){
-          const res = await api.get(`/items/detail/${id_item}`)
+          const res = await api.get(`/items/detail/user/${id_item}`)
           return res
         }
         getData().then((res) => {
@@ -52,7 +53,7 @@ const ProductDetail = () => {
         })
         .then(function (res) {
             console.log(res)
-            toast.success('Thêm vào giỏ hàng thành công', {
+            toast.success(`${res.data.message}`, {
                 position: "top-right",
                 autoClose: 1500,
                 hideProgressBar: false,
@@ -64,17 +65,30 @@ const ProductDetail = () => {
             }); 
         })
         .catch(function (res) {
-            console.log(res)
-            toast.warn('Thao tác thất bại', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
+            if(res.response.data.message){
+                toast.error(`${res.response.data.message}`, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            }
+            else{
+                toast.error(`Vui lòng đăng nhập!`, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            }
         });
     }
     const handleWishList = async (id_item) => {
@@ -85,8 +99,7 @@ const ProductDetail = () => {
             }
         })
         .then(function (res) {
-            console.log(res)
-            toast.success('Đã thêm vào danh sách yêu thích', {
+            toast.success(`${res.data.message}`, {
                 position: "top-right",
                 autoClose: 1500,
                 hideProgressBar: false,
@@ -98,7 +111,16 @@ const ProductDetail = () => {
             }); 
         })
         .catch(function (res) {
-            console.log(res)
+            toast.error(`Vui lòng đăng nhập!`, {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            }); 
         });
     }
     console.log(items)
@@ -180,7 +202,7 @@ const ProductDetail = () => {
                 <div
                  className = {value===2 ? classes['content-active'] : classes['content-none']}
                 >
-                    <p>Review</p>
+                    <Review/>
                 </div>
               </div>
               

@@ -51,16 +51,13 @@ const PaymentDetail = () => {
         })
         return res
     }
-    //console.log(infoOder)
 
     useEffect(() => {
         getPayment().then((res) => {
             setPaysmethod(res.data.paymentList)
-            console.log(1)
         })
         getShipping_partners().then((res) => {
-            setShippings(res.data.shipping_partnerList)
-            console.log(1)
+            setShippings(res.data.itemList)
         })
     },[])
     useEffect(() => {
@@ -73,7 +70,6 @@ const PaymentDetail = () => {
         })
     },[value])
 
-    console.log(items)
     const handleChangePay = (e) => {
         setPays(e.target.value)
     }
@@ -132,7 +128,6 @@ const PaymentDetail = () => {
         }
         else{
             try{
-                {
                 api.post('/cart/checkout', {
                     id_payment: pays,
                     description: description,
@@ -149,7 +144,6 @@ const PaymentDetail = () => {
                 )
                 .then(res =>{
                     
-                    console.log(res)
                     setValue(value + 1)
                     toast.success('Đặt Hàng Thành Công', {
                         position: "top-right",
@@ -166,8 +160,6 @@ const PaymentDetail = () => {
                     }, 2000);
                 })
                 .catch(err =>{
-                    console.log(err)
-                    setError(err.response.data.message)
                     toast.error(<div>{err.response.data.message}</div>, {
                         position: "top-right",
                         autoClose: 5000,
@@ -179,17 +171,11 @@ const PaymentDetail = () => {
                         theme: "colored",
                     });
                 })
-            }
-            
             }catch(error){
             console.log(error.response.data);
             }
         }
     }
-
-    console.log(pays,description,selectedShipper,latitude,longitude,discount)
-    console.log(discount)
-
     return(
         <div className={classes.container}>
             <div className="row">
@@ -208,7 +194,7 @@ const PaymentDetail = () => {
                                     <div className={classes["price"]}>
                                         <p>Đơn Giá : {item.price}</p>
                                     </div>
-                                    <div className={classes["input-quantity"]}>
+                                    <div className={classes["price"]}>
                                         <p>Số lượng: {item.amount}</p>
                                     </div>
                                     <div className={classes["total-price"]}>
@@ -276,7 +262,7 @@ const PaymentDetail = () => {
             </div> */}
             <div className={classes["Check__out"]}>
                 <button
-                    onClick={CheckOut}
+                    onClick={CheckOut} style={{marginBottom: "100px"}}
                 >
                     Đặt Hàng
                 </button>

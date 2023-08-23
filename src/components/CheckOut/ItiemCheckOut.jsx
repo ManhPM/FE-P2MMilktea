@@ -43,17 +43,14 @@ const ItiemCheckOut = () => {
                 access_token: token
             }
         })
+        console.log(res)
         return res
     }
     const getShipping_partners = async() => {
-        const res = await api.get("/shipping_partners",{
-            headers: {
-                access_token: token
-            }
-        })
+        const res = await api.get("/shipping_partners")
+        console.log(res)
         return res
     }
-    console.log(pays,description,selectedShipper,latitude,longitude,code)
     const CheckOut = () => {
         if(items.length===0){
             return(
@@ -73,7 +70,6 @@ const ItiemCheckOut = () => {
             try{
                 navigate("/payment")
             }catch(error){
-            console.log(error.response.data);
             }
         }
     }
@@ -85,7 +81,6 @@ const ItiemCheckOut = () => {
           setItems(res.data.itemList)
         })
         getData().catch((err) => {
-          console.log(err)
         })
     },[value])
 
@@ -93,11 +88,9 @@ const ItiemCheckOut = () => {
     useEffect(() => {
         getPayment().then((res) => {
             setPaysmethod(res.data.paymentList)
-            console.log(1)
         })
         getShipping_partners().then((res) => {
             setShippings(res.data.shipping_partnerList)
-            console.log(1)
         })
     },[])
     
@@ -110,12 +103,6 @@ const ItiemCheckOut = () => {
     const handleChangeShipper = (e) => {
         setSelectedShipper(e.target.value)
     }
-    //  console.log(latitude)
-    // const handleChange = (event) => {
-    //     setValue(Math.min(Math.max(Number(event.target.value), 1), 100));
-    // };
-
-    //Tang giam so luong items
     const handleIncrement = (id_item) =>{
         api.post(`cart/increase/${id_item}`,{},
         {
@@ -124,7 +111,6 @@ const ItiemCheckOut = () => {
             }
         })
         .then(function (res) {
-            console.log(res)
             toast.success('Tăng số lượng thành công', {
                 position: "top-right",
                 autoClose: 5000,
@@ -143,7 +129,6 @@ const ItiemCheckOut = () => {
             })
         })
         .catch(function (res) {
-            console.log(res)
             toast.error('Thao tác thất bại', {
                 position: "top-right",
                 autoClose: 2000,
@@ -157,7 +142,6 @@ const ItiemCheckOut = () => {
         });
         setValue(value + 1)
     }
-    //console.log(value)
     const handleDecrement = (id_item) =>{
         api.post(`cart/decrease/${id_item}`,{},
         {
@@ -166,8 +150,7 @@ const ItiemCheckOut = () => {
             }
         })
         .then(function (res) {
-            console.log(res)
-            toast.success('Giảm số lượng thành công', {
+            toast.success(`${res.data.message}`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: true,
@@ -181,12 +164,10 @@ const ItiemCheckOut = () => {
                 setItems(res.data.itemList)
             })
             getData().catch((err) => {
-                console.log(err)
             })
         })
         .catch(function (res) {
-            console.log(res)
-            toast.error('Thao tác thất bại', {
+            toast.error(`${res.response.data.message}`, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -208,7 +189,6 @@ const ItiemCheckOut = () => {
             }
         })
         .then(function (res) {
-            console.log(res)
             setValue(value + 1)
             toast.success('Đã xoá khỏi giỏ hàng', {
                 position: "top-right",
@@ -224,11 +204,9 @@ const ItiemCheckOut = () => {
                 setItems(res.data.itemList)
             })
             getData().catch((err) => {
-                console.log(err)
             })
         })
         .catch(function (res) {
-            console.log(res)
             toast.warn('Thao tác thất bại', {
                 position: "top-right",
                 autoClose: 2000,
@@ -279,33 +257,6 @@ const ItiemCheckOut = () => {
             <div className={classes["handle__error"]}>
                 <p>{error}</p>
             </div>
-            {/* <div className={classes["payment__map"]}>
-            <div className={classes["payment__method"]}>
-            <p>Chọn Phương thức thanh toán:</p>
-            <select name="lang" id="lang-select" multiple onChange={handleChangePay} className={classes["set__payment"]}>
-                {payments.map((pay) => {
-                    return(
-                    <option value={pay.id_payment}>
-                        {pay.name}
-                    </option>
-                )})}   
-            </select>
-            <p>Thêm ghi chú cho đơn hàng</p>
-            <textarea name="message" rows="7" cols="38" placeholder="Ghi Chú" onChange={handleChangeDes}></textarea>
-            <p>Chọn đơn vị vận chuyển:</p>
-            <select name="lang" id="lang-select" multiple onChange={handleChangeShipper} className={classes["set__payment"]}>
-                {shippings.map((shipping) => {
-                    return(
-                    <option value={shipping.id_shipping_partner}>
-                        {shipping.name}
-                    </option>
-                )})}   
-            </select>
-            </div>
-            <div className={classes["box__map"]}>
-                <Mapbox/>
-            </div>
-            </div> */}
             <div className={classes["Check__out"]}>
                 <button
                     onClick={CheckOut}

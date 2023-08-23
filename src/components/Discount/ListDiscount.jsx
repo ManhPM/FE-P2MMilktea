@@ -24,7 +24,7 @@ const ListDiscount = () => {
 
   return (
     <>
-      <div className={classes["main-content"]}>
+      <div style={{marginTop: "80px"}} className={classes["main-content"]}>
         <img
           className="image"
           src="https://phuclong.com.vn/uploads/post/f08dcfd34af11f-traulanh120k_640x512.png"
@@ -36,7 +36,7 @@ const ListDiscount = () => {
             {discountList.map((item) => {
               return (
                 <div className="col-md-4">
-                  <div className="card" style={{ width: "25rem",marginBottom:"100px" }}>
+                  <div className="card" style={{ fontSize: "24px", width: "21rem",marginBottom:"100px" }}>
                     <img
                       src="https://phuclong.com.vn/uploads/post/69ce5a2fa7a3ee-dgtkhaitruongplthangloi_640x512.jpg"
                       className="card-img-top"
@@ -44,7 +44,7 @@ const ListDiscount = () => {
                     />
                     <div className="card-body">
                       <div className={classes.code__discount}>
-                        <h5 className="card-title">CODE: {item.code}</h5>
+                        <h5 className="card-title">Mã giảm giá: {item.code}</h5>
                       </div>
                       <h6 className="card-subtitle mb-2 text-muted">
                         Ngày bắt đầu: {item.start_date}
@@ -59,7 +59,7 @@ const ListDiscount = () => {
                         Số lượng còn lại: {item.quantity}
                       </h6>
                       <div className={classes["des_discount"]}>
-                        <p className="card-text">Mô tả: Giảm {item.discount_percent}% cho tổng hoá đơn</p>
+                        <p className="card-text">Mô tả: {item.description}</p>
                       </div>
                     </div>
                   </div>

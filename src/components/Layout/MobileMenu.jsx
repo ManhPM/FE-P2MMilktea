@@ -46,7 +46,7 @@ const Element = (props) => {
             to="/shop"
             className={(props) => (props.isActive ? classes.active : "")}
           >
-            Thực đơn
+            Sản phẩm
           </NavLink>
         </li>
         <li className={classes["menu-item"]}>

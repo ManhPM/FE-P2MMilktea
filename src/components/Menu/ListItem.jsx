@@ -56,10 +56,18 @@ const ListItem = () =>{
 
     //api lấy danh sách item
     const fetchData = async (id_type) => {
-        const res = await api.get(`/items?id_type=${id_type}`)
-        const data = res.data.itemList;
-        return data;
-        
+        console.log(id_type)
+        if(id_type === 4){
+            const res = await api.get(`/items/topping`)
+            console.log(res)
+            const data = res.data.itemList;
+            return data;
+        }
+        else{
+            const res = await api.get(`/items?id_type=${id_type}`)
+            const data = res.data.itemList;
+            return data;
+        }
     }
 
     const handleTypes = async (id_type) => {
@@ -78,7 +86,7 @@ const ListItem = () =>{
         })
         .then(function (res) {
             console.log(res)
-            toast.success('Thêm hàng thành công', {
+            toast.success('Thêm sản phẩm vào giỏ hàng!', {
                 position: "top-right",
                 autoClose: 1500,
                 hideProgressBar: true,
@@ -91,7 +99,7 @@ const ListItem = () =>{
         })
         .catch(function (res) {
             console.log(res)
-            toast.error('Thêm hàng thất bại', {
+            toast.error('Vui lòng đăng nhập!', {
                 position: "top-right",
                 autoClose: 1500,
                 hideProgressBar: true,
@@ -106,7 +114,7 @@ const ListItem = () =>{
     return (
         <div>
             <div className="container">
-                <h1 className={classes['head-content']}>Thực đơn hôm nay</h1>
+                <h1 className={classes['head-content']}>Sản phẩm</h1>
                 <div className={classes['list-type']}>
                     {types.map((type) =>{
                         return(
@@ -119,8 +127,6 @@ const ListItem = () =>{
                             <span>{type.name}</span>
                         </div>
                     )})}
-                    
-                    
                 </div>
                 <div className="container">
                     <div className="row ">

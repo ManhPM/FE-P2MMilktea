@@ -54,14 +54,7 @@ const Index = (props) => {
             <SideCartList cartItems={itemList} />
             {items.length > 0 && (
               <div className={classes.footer}>
-                {/* <div className={classes.total}>
-                  <div>TỔNG GIÁ:</div>
-                  <div>{totalPrice} Đ</div>
-                </div> */}
                 <div className={classes["button-group"]}>
-                  {/* <NavLink to="/check-out">
-                    <Button>Thanh toán</Button>
-                  </NavLink> */}
                   <NavLink to="/check-out">
                     <BorderedButton>Chi tiết</BorderedButton>
                   </NavLink>

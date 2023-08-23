@@ -11,9 +11,10 @@ import Profile from './components/Profile/Profile';
 import CheckOut from './components/CheckOut/CheckOut';
 import Oders from './pages/Oders';
 import OrderDetail from './components/ListOrders/OderDetail';
-import ChangePassword from './components/Changepw/ChangePassword';
 import Payment from './components/Payment/Payment';
 import Discount from './components/Discount/Discount';
+import Forgotpassword from './pages/Forgotpassword';
+import ChangePassword from './pages/Changepassword';
 
 function App() {
 
@@ -30,9 +31,10 @@ function App() {
           <Route path="/check-out" element={<CheckOut/>} />
           <Route path="/orders" element={<Oders/>} />
           <Route path="/orders/:id_order" element={<OrderDetail/>} />
-          <Route path="/change-password" element={<ChangePassword/>} />
+          <Route path="/changepassword" element={<ChangePassword/>} />
           <Route path="/payment" element={<Payment/>} />
           <Route path="/discount" element={<Discount/>} />
+          <Route path="/forgotpassword" element={<Forgotpassword/>} />
         </Routes>
       </Layout>
     </div>
