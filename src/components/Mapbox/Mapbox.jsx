@@ -47,7 +47,7 @@ const Mapbox  = () => {
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 // onViewportChange={(viewport) => setViewport(viewport)}
                 onMove={evt => setViewport(evt.viewport)}
-                mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+                mapboxApiAccessToken={"pk.eyJ1IjoiZHVjaGF1MDUyMSIsImEiOiJjbGlqN3l3bzgwNHZkM2txbzhiemdnZDlhIn0.L20rg56BLB6iTrMutkntMw"}
             >
                 <Marker
                     latitude={latitude}
